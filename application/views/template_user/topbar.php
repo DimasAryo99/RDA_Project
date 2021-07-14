@@ -1,4 +1,4 @@
-        <!-- Content Wrapper -->
+<!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
@@ -36,14 +36,46 @@
 
                             <ul class="nav navbar-nav navbar-right">
                                 <?php if ($this->session->userdata('username')) { ?>
-                                    <li>
-                                        <div>Selamat Datang <?php echo $this->session->userdata('username') ?></div>
+
+                                    <li class="nav-item dropdown no-arrow">
+                                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <?php echo $this->session->userdata('username') ?></span>
+                                                <img class="img-profile rounded-circle"
+                                                    src="<?= base_url('asset/img/profile/') . $user['image'];?>">
+                                            </a>
+                                            <!-- Dropdown - User Information -->
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                                aria-labelledby="userDropdown">
+                                                <a class="dropdown-item" href="#">
+                                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Profile
+                                                
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item"<?php echo anchor('auth_pengguna/logout', 'logout') ?> data-toggle="modal" data-target="#logoutModal">
+                                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Logout
+                                                </a>
+                                            </div>
                                     </li>
-                                    <li class="ml-2"><?php echo anchor('auth_pengguna/logout', 'logout') ?></li>
                                 <?php } 
                                 else 
                                 { ?>
-                                    <li><?php echo anchor('auth_pengguna/login', 'login'); ?></li>
+                                    <li class="nav-item dropdown no-arrow">
+                                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                                                <img class="img-profile rounded-circle"
+                                                    src="">
+                                            </a>
+                                            <!-- Dropdown - User Information -->
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                                aria-labelledby="userDropdown">
+                                                <a class="dropdown-item" <?php echo anchor('auth_pengguna/login', 'login'); ?>>
+                                                </a>
+                                            </div>
+                                    </li>
+
 
                                 <?php } ?>
 

@@ -6,6 +6,7 @@ class home_user extends CI_Controller
     public function index()
     {
         $data['tittle'] = 'Home';
+        $data['user'] = $this->db->get('pengguna')->row_array();
         $this->load->model('Produk_model');
         $data['produk'] = $this->Produk_model->tampil_produk()->result();
         $this->load->view('template_user/header');
