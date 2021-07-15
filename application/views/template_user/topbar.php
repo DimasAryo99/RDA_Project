@@ -35,12 +35,12 @@
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">
-                                <?php if ($this->session->userdata('username')) { ?>
+                                <?php if ($this->session->userdata('email')) { ?>
 
                                     <li class="nav-item dropdown no-arrow">
                                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <?php echo $this->session->userdata('username') ?></span>
+                                                <span></span>
                                                 <img class="img-profile rounded-circle"
                                                     src="<?= base_url('asset/img/profile/') . $user['image'];?>">
                                             </a>

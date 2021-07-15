@@ -6,7 +6,7 @@ class tampilan_user extends CI_Controller
     {
         parent::__construct();
 
-        if ($this->session->userdata('role')!='1') 
+        if ($this->session->userdata('email')=='') 
         {
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
             Anda Belum Login!

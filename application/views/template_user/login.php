@@ -19,11 +19,11 @@
                                     <?php echo $this->session->flashdata('pesan') ?>
                                     <form method="post" action="<?php echo base_url('auth_pengguna/login') ?>" class="user">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Masukan Username Anda..." name="username">
-                                            <?php echo form_error('username', '<div class="text-danger small">', '</div>'); ?>
+                                            <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Masukan Email Anda..." name="email">
+                                            <?php echo form_error('email', '<div class="text-danger small">', '</div>'); ?>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" id="exampleInputPassword" placeholder="Masukan Password Anda..." name="password">
+                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Masukan Password Anda..." name="password">
                                             <?php echo form_error('password', '<div class="text-danger small">', '</div>'); ?>
                                         </div>
 

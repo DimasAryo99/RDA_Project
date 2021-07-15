@@ -18,6 +18,11 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="email" placeholder="Email Anda" name="email">
+                                    <?= form_error('email', '<div class="text-danger small ml-2">', '</div>') ?>
+                                </div>
+
+                                <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="username" placeholder="Username Anda" name="username">
                                     <?= form_error('username', '<div class="text-danger small ml-2">', '</div>') ?>
                                 </div>

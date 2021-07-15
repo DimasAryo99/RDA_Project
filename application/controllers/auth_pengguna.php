@@ -5,7 +5,7 @@ class auth_pengguna extends CI_Controller
         public function login()
         {
             $data['tittle']='Login';
-            $this->form_validation->set_rules('username', 'Username', 'required', ['required' => 'Username wajib diisi!']);
+            $this->form_validation->set_rules('email', 'Email', 'required', ['required' => 'Email wajib diisi!']);
             $this->form_validation->set_rules('password', 'Password', 'required', ['required' => 'Password wajib diisi!']);
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('template/auth_header');
@@ -24,7 +24,7 @@ class auth_pengguna extends CI_Controller
                   </div>');
                     redirect('auth_pengguna/login');
                 } else {
-                    $this->session->set_userdata('username', $auth->username);
+                    $this->session->set_userdata('email', $auth->email);
                     $this->session->set_userdata('role', $auth->role);
                     switch ($auth->role) {
                         case 1:
