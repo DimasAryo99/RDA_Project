@@ -11,6 +11,7 @@ class User_model extends CI_Model
         $this->db->where('admin_toko.email_admin',$this->session->userdata('email_admin'));
         return $this->db->get();
     }
+    
     public function ProdukToko()
     {
         $this->db->select('produk.*');
