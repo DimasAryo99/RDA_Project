@@ -23,13 +23,12 @@ class tampilan_user extends CI_Controller
         $this->load->model('Produk_model');
         $produk = $this->Produk_model->find($id);
 
-        $data = array(
+        $data = [
             'id'      => $produk->id_produk,
             'qty'     => 1,
             'price'   => $produk->harga_produk,
             'name'    => $produk->nama_produk,
-
-        );
+        ];
         $this->cart->insert($data);
         redirect('home_user');
     }
@@ -37,9 +36,11 @@ class tampilan_user extends CI_Controller
     public function detail_keranjang()
     {
         $data['tittle'] = 'Home';
+        $data['user'] =  $this->db->get_where('pengguna',['email' =>
+        $this->session->userdata('email')])->row_array();
         $this->load->view('template_user/header');
         $this->load->view('template_user/sidebar', $data);
-        $this->load->view('template_user/topbar');
+        $this->load->view('template_user/topbar',$data);
         $this->load->view('template_user/keranjang');            
         $this->load->view('template_user/footer');
     }
@@ -53,24 +54,28 @@ class tampilan_user extends CI_Controller
     public function pembayaran()
     {
         $data['tittle'] = 'Home';
+        $data['user'] =  $this->db->get_where('pengguna',['email' =>
+        $this->session->userdata('email')])->row_array();
         $this->load->model('invoice_model');
         $data['pembayaran'] = $this->invoice_model->kurir_invoice();
         $this->load->view('template_user/header');
         $this->load->view('template_user/sidebar', $data);
-        $this->load->view('template_user/topbar');
+        $this->load->view('template_user/topbar',$data);
         $this->load->view('template_user/pembayaran',$data);            
         $this->load->view('template_user/footer');
     }
 
     public function proses_pesanan()
     {
+        $data['user'] =  $this->db->get_where('pengguna',['email' =>
+        $this->session->userdata('email')])->row_array();
         $this->load->model('invoice_model');
         $is_processed = $this->invoice_model->index();
         if ($is_processed) {
             $this->cart->destroy();
             $this->load->view('template_user/header');
             $this->load->view('template_user/sidebar');
-            $this->load->view('template_user/topbar');
+            $this->load->view('template_user/topbar',$data);
             $this->load->view('template_user/proses_pesanan');            
             $this->load->view('template_user/footer');
         } else {

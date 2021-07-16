@@ -42,7 +42,8 @@ class auth_pengguna extends CI_Controller
     
         public function logout()
         {
-            $this->session->sess_destroy();
-            redirect('auth_pengguna/login');
+            $this->session->unset_userdata('email');
+            $this->session->unset_userdata('role');
+            redirect('home_user');
         }
 }
