@@ -199,4 +199,33 @@ class Superadmin extends CI_Controller
          redirect('Superadmin/kurir');
      }
 
+     public function tampil_invoice()
+     {
+        $data['tittle'] = 'Invoice';
+        $data['user'] =  $this->db->get_where('user',['email' =>
+        $this->session->userdata('email')])->row_array();
+
+         $data['invoice'] = $this->invoice_model->tampil_data();
+         $this->load->view('template/header',$data);
+         $this->load->view('template/sidebar_superadmin',$data);
+         $this->load->view('template/topbar_superadmin',$data);
+         $this->load->view('invoice/index',$data);
+         $this->load->view('template/footer_superadmin');
+     }
+
+     public function detail($id_invoice)
+     {
+        $data['tittle'] = 'Invoice';
+        $data['user'] =  $this->db->get_where('user',['email' =>
+        $this->session->userdata('email')])->row_array();
+
+         $data['invoice'] = $this->invoice_model->ambil_id_invoice($id_invoice);
+         $data['pesanan'] = $this->invoice_model->ambil_id_pesanan($id_invoice);
+         $this->load->view('template/header',$data);
+         $this->load->view('template/sidebar_superadmin',$data);
+         $this->load->view('template/topbar_superadmin',$data);
+         $this->load->view('invoice/detail',$data);
+         $this->load->view('template/footer_superadmin');
+     }
+
 } 

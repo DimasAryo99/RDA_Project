@@ -15,8 +15,6 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                                                 
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
                         <div class="navbar">
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
@@ -27,6 +25,7 @@
 
                             <div class="navbar">
                             <ul class="nav navbar-nav navbar-right">
+                                
                                 <li>
                                     <?php $keranjang = 'Keranjang Belanja :  ' . $this->cart->total_items() . ' items' ?>
 
