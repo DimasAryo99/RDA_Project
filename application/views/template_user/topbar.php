@@ -11,27 +11,28 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
+
                     
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                                                
+                        
                         <div class="navbar">
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
-                                </li>
-                            </ul>
+                                    </li>
+                                </ul>
 
-                            <div class="topbar-divider d-none d-sm-block"></div>
-
-                            <div class="navbar">
-                            <ul class="nav navbar-nav navbar-right">
+                                <!-- Alert (Topbar) -->
+            
                                 
-                                <li>
-                                    <?php $keranjang = 'Keranjang Belanja :  ' . $this->cart->total_items() . ' items' ?>
-
-                                    <?php echo anchor('tampilan_user/detail_keranjang', $keranjang)  ?>
-                                </li>
-                            </ul>
+                                <div class="topbar-divider d-none d-sm-block"></div>
+                                
+                                <a href="<?= base_url('tampilan_user/detail_keranjang')?>" id="alertsDropdown" role="button"  
+                                   aria-haspopup="true" aria-expanded="false">
+                                   <i class="fas fa-shopping-cart"></i>
+                                            <!-- Counter - Alerts -->
+                                            <span class="badge badge-danger badge-counter"><?=$tampil['total_keranjang']?></span>
+                                </a>
 
                             <ul class="nav navbar-nav navbar-right">
                                 <?php if ($this->session->userdata('email')) { ?>

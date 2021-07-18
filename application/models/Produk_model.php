@@ -34,6 +34,31 @@ class Produk_model extends CI_Model
     {
         $this->db->where('id_produk', $produkid);
         $this->db->delete('produk');
+    }
+    
+    public function tampilan_keranjang()
+    {
+        $this->db->select('keranjang.id_keranjang, produk.nama_produk, keranjang.jumlah, produk.harga_produk, (produk.harga_produk * keranjang.jumlah) AS total_harga');
+        $this->db->from('produk');
+        $this->db->join('keranjang','produk.id_produk = keranjang.id_produk');
+        $this->db->join('pengguna','keranjang.id_pengguna = pengguna.id_pengguna');
+        $this->db->where('pengguna.email', $this->session->userdata('email'));
+        return $this->db->get();
+    }
+    
+    public function tampil_jumlahkeranjang()
+    {
+        $this->db->select('count(keranjang.id_keranjang) as total_keranjang');
+        $this->db->from('keranjang');
+        $this->db->join('pengguna','keranjang.id_pengguna = pengguna.id_pengguna');
+        $this->db->where('pengguna.email', $this->session->userdata('email'));
+        return $this->db->get();
+    }
+
+    public function hapus_keranjang($hapus)
+    {
+        $this->db->where('id_keranjang', $hapus);
+        $this->db->delete('keranjang');
     } 
 
     public function find($id)

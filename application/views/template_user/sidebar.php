@@ -1,10 +1,11 @@
-<body id="page-top">
+<body id="page-top" >
 
     <!-- Page Wrapper -->
     <div id="wrapper">            
         
-            <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Sidebar -->
+        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" 
+        style="background-color:#0076D2;">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -45,7 +46,7 @@
         <?php if($tittle == $sm1['nama_kategori']): ?>
         <li class="nav-item active">
             <?php else:  ?>
-            <li class="nav-item">
+            <li class="nav-item" >
             <?php endif;  ?>
             <a class="nav-link" href="<?= base_url($sm1['url']);  ?>">
                 <i class=""></i>
