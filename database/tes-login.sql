@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2021 at 01:33 PM
+-- Generation Time: Jul 19, 2021 at 08:20 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -72,6 +72,19 @@ INSERT INTO `kategori` (`kategori_id`, `nama_kategori`, `url`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `keranjang`
+--
+
+CREATE TABLE `keranjang` (
+  `id_keranjang` int(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
+  `id_pengguna` int(11) NOT NULL,
+  `jumlah` int(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kurir`
 --
 
@@ -117,7 +130,7 @@ INSERT INTO `layanan_kurir` (`layanan_id`, `nama_layanan`) VALUES
 --
 
 CREATE TABLE `pengguna` (
-  `id` int(11) NOT NULL,
+  `id_pengguna` int(11) NOT NULL,
   `nama` varchar(128) NOT NULL,
   `username` varchar(128) NOT NULL,
   `password` varchar(128) NOT NULL,
@@ -130,8 +143,9 @@ CREATE TABLE `pengguna` (
 -- Dumping data for table `pengguna`
 --
 
-INSERT INTO `pengguna` (`id`, `nama`, `username`, `password`, `role`, `image`, `email`) VALUES
-(2, 'tes123', 'dimas', '1234', 1, 'default.jpg', 'tes123@mail.com');
+INSERT INTO `pengguna` (`id_pengguna`, `nama`, `username`, `password`, `role`, `image`, `email`) VALUES
+(2, 'tes123', 'dimas', '1234', 1, 'default.jpg', 'tes123@mail.com'),
+(3, 'Dimas', 'Dimas', '1234', 1, 'default.jpg', 'dimasaryo819@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -355,6 +369,12 @@ ALTER TABLE `kategori`
   ADD PRIMARY KEY (`kategori_id`);
 
 --
+-- Indexes for table `keranjang`
+--
+ALTER TABLE `keranjang`
+  ADD PRIMARY KEY (`id_keranjang`);
+
+--
 -- Indexes for table `kurir`
 --
 ALTER TABLE `kurir`
@@ -370,7 +390,7 @@ ALTER TABLE `layanan_kurir`
 -- Indexes for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_pengguna`);
 
 --
 -- Indexes for table `produk`
@@ -443,10 +463,16 @@ ALTER TABLE `kategori`
   MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT for table `keranjang`
+--
+ALTER TABLE `keranjang`
+  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
