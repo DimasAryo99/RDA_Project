@@ -15,7 +15,7 @@ class Admintoko extends CI_Controller
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebar_admintoko',$data);
         $this->load->view('template/topbar_admintoko',$data);
-        $this->load->view('user/index',$data);
+        $this->load->view('admintoko/index',$data);
         $this->load->view('template/footer_admintoko');
     }
 
@@ -133,6 +133,35 @@ class Admintoko extends CI_Controller
         $this->Produk_model->HapusKurir($produkid);
         $this->session->set_flashdata('flash', 'Dihapus');
         redirect('Admintoko/produk');   
+    }
+
+    public function tampil_invoice()
+    {
+       $data['tittle'] = 'Invoice';
+       $data['admin_toko'] =  $this->db->get_where('admin_toko',['email_admin' =>
+       $this->session->userdata('email_admin')])->row_array();
+
+        $data['invoice'] = $this->invoice_model->tampil_data();
+        $this->load->view('template/header',$data);
+        $this->load->view('template/sidebar_admintoko',$data);
+        $this->load->view('template/topbar_admintoko',$data);
+        $this->load->view('admintoko/invoice',$data);
+        $this->load->view('template/footer_admintoko');
+    }
+
+    public function detail_invoice($id_invoice)
+    {
+       $data['tittle'] = 'Invoice';
+       $data['admin_toko'] =  $this->db->get_where('admin_toko',['email_admin' =>
+       $this->session->userdata('email_admin')])->row_array();
+
+        $data['invoice'] = $this->invoice_model->ambil_id_invoice($id_invoice);
+        $data['pesanan'] = $this->invoice_model->ambil_id_pesanan($id_invoice);
+        $this->load->view('template/header',$data);
+        $this->load->view('template/sidebar_superadmin',$data);
+        $this->load->view('template/topbar_superadmin',$data);
+        $this->load->view('admintoko/detail',$data);
+        $this->load->view('template/footer_superadmin');
     }
 
 } 

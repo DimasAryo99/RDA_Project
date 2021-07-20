@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <h4>Detail Pesanan <div class="btn btn-sm btn-success">No. Invoice : <?php echo $invoice->id_invoice ?></div>
+    <h4>Detail Pesanan <div class="btn btn-sm btn-success">No. Invoice : <!--?php echo $invoice->id_invoice ?--></div>
     </h4>
 
     <table class="table table-bordered table-hover table-striped">
@@ -12,7 +12,7 @@
             <th>Sub Total</th>
         </tr>
 
-        <?php
+        <!--?php
         $total = 0;
         foreach ($pesanan as $psn) :
             $subtotal = $psn->jumlah * $psn->harga;
@@ -26,12 +26,12 @@
                 <td><?php echo number_format($subtotal, 0, ',', '.') ?></td>
             </tr>
 
-        <?php endforeach; ?>
+        <!?php endforeach; ?>
 
-        <tr>
+        <tr-->
             <td colspan="4" align="right">Grand Total</td>
             <td align="right">Rp. <?php echo number_format($total, 0, ',', '.') ?></td>
-        </tr>
+        </tr-->
     </table>
 
     <a href="<?php echo base_url('Superadmin/tampil_invoice') ?>">

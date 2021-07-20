@@ -209,11 +209,11 @@ class Superadmin extends CI_Controller
          $this->load->view('template/header',$data);
          $this->load->view('template/sidebar_superadmin',$data);
          $this->load->view('template/topbar_superadmin',$data);
-         $this->load->view('invoice/index',$data);
+         $this->load->view('admin/invoice',$data);
          $this->load->view('template/footer_superadmin');
      }
 
-     public function detail($id_invoice)
+     public function detail_invoice($id_invoice)
      {
         $data['tittle'] = 'Invoice';
         $data['user'] =  $this->db->get_where('user',['email' =>
@@ -224,7 +224,7 @@ class Superadmin extends CI_Controller
          $this->load->view('template/header',$data);
          $this->load->view('template/sidebar_superadmin',$data);
          $this->load->view('template/topbar_superadmin',$data);
-         $this->load->view('invoice/detail',$data);
+         $this->load->view('admin/detail',$data);
          $this->load->view('template/footer_superadmin');
      }
 

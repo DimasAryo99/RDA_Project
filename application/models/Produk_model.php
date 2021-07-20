@@ -57,11 +57,37 @@ class Produk_model extends CI_Model
         return $this->db->get();
     }
 
+    public function tampil_updatekeranjang($id,$user)
+    {
+        $this->db->select('*');
+        $this->db->from('keranjang');
+        $this->db->join('produk','keranjang.id_produk = produk.id_produk');
+        $this->db->join('pengguna','keranjang.id_pengguna = pengguna.id_pengguna');
+        $this->db->where('keranjang.id_pengguna', $user);
+        $this->db->where('keranjang.id_produk', $id);
+        return $this->db->get();
+    }
+
+    public function simpan_pesanan($user)
+    {
+        $this->db->select('*');
+        $this->db->from('keranjang');
+        $this->db->where('keranjang.id_pengguna', $user);
+        return $this->db->get();
+    }
+
     public function hapus_keranjang($hapus)
     {
         $this->db->where('id_keranjang', $hapus);
         $this->db->delete('keranjang');
     } 
+    
+    public function destroykeranjang($c)
+    {
+        $this->db->where('id_keranjang',$c);
+        $this->db->delete('keranjang');
+    } 
+    
 
     public function find($id)
     {
