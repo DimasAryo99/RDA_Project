@@ -120,6 +120,15 @@ class tampilan_user extends CI_Controller
             ];
             $this->db->insert('tb_pesanan', $data);
             $this->Produk_model->destroykeranjang($c['id_keranjang']);
+
+            //taro kurang stok
+            $produk=$this->db->get_where('produk',['id_produk'=>$c['id_produk']])->row_array();
+
+            $hasil = $produk['stok_produk'] - $c['jumlah'];
+            
+            $this->db->set('stok_produk',$hasil);
+            $this->db->where('id_produk',$produk['id_produk']);
+            $this->db->update('produk');
         }
         $this->session->set_flashdata('flash', 'Dihapus'); 
         redirect('home_user/index');

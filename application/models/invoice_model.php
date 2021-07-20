@@ -17,6 +17,7 @@ class invoice_model extends CI_Model
         $this->db->insert('tb_invoice', $invoice);
         $id_invoice = $this->db->insert_id();
         
+        
         foreach ($this->db->contents() as $item) {
             $data = [
                 'id_invoice'        => $id_invoice,
