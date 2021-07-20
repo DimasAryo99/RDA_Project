@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2021 at 08:20 AM
+-- Generation Time: Jul 20, 2021 at 09:13 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -79,8 +79,18 @@ CREATE TABLE `keranjang` (
   `id_keranjang` int(11) NOT NULL,
   `id_produk` int(11) NOT NULL,
   `id_pengguna` int(11) NOT NULL,
-  `jumlah` int(128) NOT NULL
+  `jumlah` int(128) NOT NULL,
+  `toko_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `keranjang`
+--
+
+INSERT INTO `keranjang` (`id_keranjang`, `id_produk`, `id_pengguna`, `jumlah`, `toko_id`) VALUES
+(34, 5, 3, 1, 15),
+(35, 5, 3, 1, 15),
+(36, 5, 3, 1, 15);
 
 -- --------------------------------------------------------
 
@@ -91,18 +101,17 @@ CREATE TABLE `keranjang` (
 CREATE TABLE `kurir` (
   `kurir_id` int(11) NOT NULL,
   `nama_kurir` varchar(128) NOT NULL,
-  `layanan_id` int(11) NOT NULL
+  `layanan_kurir` varchar(128) NOT NULL,
+  `ongkos_kurir` int(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `kurir`
 --
 
-INSERT INTO `kurir` (`kurir_id`, `nama_kurir`, `layanan_id`) VALUES
-(1, 'JNE', 1),
-(3, 'SiCepat', 1),
-(4, 'SiCepat', 2),
-(5, 'JNE', 2);
+INSERT INTO `kurir` (`kurir_id`, `nama_kurir`, `layanan_kurir`, `ongkos_kurir`) VALUES
+(2, 'SiCepat', 'Reguler', 9000),
+(3, 'JNE', 'Reguler', 9000);
 
 -- --------------------------------------------------------
 
@@ -134,7 +143,7 @@ CREATE TABLE `pengguna` (
   `nama` varchar(128) NOT NULL,
   `username` varchar(128) NOT NULL,
   `password` varchar(128) NOT NULL,
-  `role` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
   `image` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -143,9 +152,9 @@ CREATE TABLE `pengguna` (
 -- Dumping data for table `pengguna`
 --
 
-INSERT INTO `pengguna` (`id_pengguna`, `nama`, `username`, `password`, `role`, `image`, `email`) VALUES
-(2, 'tes123', 'dimas', '1234', 1, 'default.jpg', 'tes123@mail.com'),
-(3, 'Dimas', 'Dimas', '1234', 1, 'default.jpg', 'dimasaryo819@gmail.com');
+INSERT INTO `pengguna` (`id_pengguna`, `nama`, `username`, `password`, `role_id`, `image`, `email`) VALUES
+(2, 'tes123', 'dimas', '1234', 3, 'default.jpg', 'tes123@mail.com'),
+(3, 'Dimas', 'Dimas', '1234', 3, 'default.jpg', 'dimasaryo819@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -179,28 +188,40 @@ INSERT INTO `produk` (`id_produk`, `nama_produk`, `ket_produk`, `harga_produk`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `status_invoice`
+--
+
+CREATE TABLE `status_invoice` (
+  `id_statusinv` int(3) NOT NULL,
+  `nama_status` varchar(128) NOT NULL,
+  `role_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `status_invoice`
+--
+
+INSERT INTO `status_invoice` (`id_statusinv`, `nama_status`, `role_id`) VALUES
+(1, 'Diproses', 1),
+(2, 'Terkirim', 2),
+(3, 'Sampai', 3);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_invoice`
 --
 
 CREATE TABLE `tb_invoice` (
-  `id` int(11) NOT NULL,
+  `id_invoice` int(11) NOT NULL,
   `nama` varchar(56) NOT NULL,
   `alamat` varchar(225) NOT NULL,
+  `nomor_telepon` varchar(128) NOT NULL,
   `tgl_pesan` datetime NOT NULL,
   `batas_bayar` datetime NOT NULL,
+  `id_statusinv` int(3) NOT NULL,
   `kurir_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_invoice`
---
-
-INSERT INTO `tb_invoice` (`id`, `nama`, `alamat`, `tgl_pesan`, `batas_bayar`, `kurir_id`) VALUES
-(9, 'Dimas Aryo Wibowo', 'JL.CEMERLANG NO.9 RT/RW.002/006 JATIBENING BARU PONDOKGEDE BEKASI 17412', '2021-06-28 02:15:04', '2021-06-29 02:15:04', 0),
-(10, 'Dimas Aryo Wibowo', 'JL.CEMERLANG NO.9 RT/RW.002/006 JATIBENING BARU PONDOKGEDE BEKASI 17412', '2021-06-28 02:18:44', '2021-06-29 02:18:44', 0),
-(11, 'Dimas Aryo Wibowo', 'JL.CEMERLANG NO.9 RT/RW.002/006 JATIBENING BARU PONDOKGEDE BEKASI 17412', '2021-06-28 02:23:43', '2021-06-29 02:23:43', 0),
-(12, 'Dimas Aryo Wibowo', 'JL.CEMERLANG NO.9 RT/RW.002/006 JATIBENING BARU PONDOKGEDE BEKASI 17412', '2021-06-28 02:26:40', '2021-06-29 02:26:40', 0),
-(13, 'asddas', 'asdas', '2021-07-03 23:32:23', '2021-07-04 23:32:23', 0);
 
 -- --------------------------------------------------------
 
@@ -209,13 +230,14 @@ INSERT INTO `tb_invoice` (`id`, `nama`, `alamat`, `tgl_pesan`, `batas_bayar`, `k
 --
 
 CREATE TABLE `tb_pesanan` (
-  `id` int(11) NOT NULL,
+  `id_pesanan` int(11) NOT NULL,
   `id_invoice` int(11) NOT NULL,
   `id_produk` int(11) NOT NULL,
   `nama_produk` varchar(50) NOT NULL,
-  `jumlah` int(3) NOT NULL,
+  `jumlah` int(11) NOT NULL,
   `harga` int(10) NOT NULL,
-  `pilihan` text NOT NULL
+  `foto` varchar(128) NOT NULL,
+  `toko_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -399,16 +421,22 @@ ALTER TABLE `produk`
   ADD PRIMARY KEY (`id_produk`);
 
 --
+-- Indexes for table `status_invoice`
+--
+ALTER TABLE `status_invoice`
+  ADD PRIMARY KEY (`id_statusinv`);
+
+--
 -- Indexes for table `tb_invoice`
 --
 ALTER TABLE `tb_invoice`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_invoice`);
 
 --
 -- Indexes for table `tb_pesanan`
 --
 ALTER TABLE `tb_pesanan`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_pesanan`);
 
 --
 -- Indexes for table `toko`
@@ -466,13 +494,25 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT for table `kurir`
+--
+ALTER TABLE `kurir`
+  MODIFY `kurir_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
   MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `status_invoice`
+--
+ALTER TABLE `status_invoice`
+  MODIFY `id_statusinv` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
