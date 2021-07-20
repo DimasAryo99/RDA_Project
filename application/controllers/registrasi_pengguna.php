@@ -27,7 +27,7 @@ class registrasi_pengguna extends CI_Controller
                         'email'         => $this->input->post('email'),
                         'username'      => $this->input->post('username'),
                         'password'      => $this->input->post('password_1'),
-                        'role'          => 1
+                        'role_id'       => 3
                     ];
 
                     $this->db->insert('pengguna', $data);

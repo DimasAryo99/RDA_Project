@@ -47,8 +47,7 @@
                                             <!-- Dropdown - User Information -->
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                                 aria-labelledby="userDropdown">
-                                                <a class="dropdown-item" <?php echo anchor('auth_pengguna/logout','logout') ?>>
-                                                </a>
+                                                <a class="dropdown-item"><?php echo anchor('auth_pengguna/logout','logout') ?></a>
                                             </div>
                                     </li>
                                 <?php } 

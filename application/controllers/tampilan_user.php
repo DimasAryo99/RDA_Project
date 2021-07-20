@@ -24,16 +24,16 @@ class tampilan_user extends CI_Controller
         //$produk = $this->Produk_model->find($id);
         $user=$this->db->get_where('pengguna',['email'=>$this->session->userdata('email')])->row_array();
         $toko=$this->db->get_where('produk',['id_produk'=>$id])->row_array();
-        $data = [
-            'id_produk'  => $id,
-            'id_pengguna'=> $user['id_pengguna'],
-            'jumlah'     => 1,
-        ];
+            $data = [
+                'id_produk'  => $id,
+                'toko_id'    => $toko['toko_id'],
+                'id_pengguna'=> $user['id_pengguna'],
+                'jumlah'     => 1,
+            ]; 
         $this->db->insert('keranjang',$data);
         redirect('home_user');
     }
-    
-    
+        
     public function detail_keranjang()
     {
         $data['tittle'] = 'Home';
@@ -49,6 +49,7 @@ class tampilan_user extends CI_Controller
         $this->load->view('template_user/keranjang',$data);            
         $this->load->view('template_user/footer');
     }
+
     
     public function hapus_keranjang($hapus)
     {
@@ -64,13 +65,31 @@ class tampilan_user extends CI_Controller
         $this->session->userdata('email')])->row_array();
         
         $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
-
+        $data['kurir'] = $this->Kurir_model->tampilan_kurir();
         $this->load->model('invoice_model');
         $this->load->view('template_user/header');
         $this->load->view('template_user/sidebar', $data);
         $this->load->view('template_user/topbar',$data);
         $this->load->view('template_user/pembayaran',$data);            
         $this->load->view('template_user/footer');
+    }
+    
+    public function tambah_invoice()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $invoice    = [
+            'nama'          => $this->input->post('nama'),
+            'alamat'        => $this->input->post('alamat'),
+            'nomor_telepon' => $this->input->post('no_telp'),
+            'kurir_id'      => $this->input->post('kurir_id'),
+            'tgl_pesan'     => date('Y-m-d H:i:s'),
+            'batas_bayar'   => date('Y-m-d H:i:s', mktime(date('H'), date('i'), date('s'), date('m'), date('d') + 1, date('Y'))),
+        ];
+        $this->db->insert('tb_invoice', $invoice);
+        redirect('home_user/index');
+
+        $id_invoice = $this->db->insert_id();
+        
     }
 
     public function proses_pesanan()
@@ -83,8 +102,9 @@ class tampilan_user extends CI_Controller
         $data['produk'] = $this->Produk_model->tampil_produk()->result();
 
         $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
-        $is_processed = $this->invoice_model->index();
-        if ($is_processed) {
+        $is_processed = $this->model_invoice->index();
+        if ($is_processed) 
+        {
             $this->cart->destroy();
             $this->load->view('template_user/header');
             $this->load->view('template_user/sidebar',$data);

@@ -43,6 +43,7 @@ class Produk_model extends CI_Model
         $this->db->join('keranjang','produk.id_produk = keranjang.id_produk');
         $this->db->join('pengguna','keranjang.id_pengguna = pengguna.id_pengguna');
         $this->db->where('pengguna.email', $this->session->userdata('email'));
+        $this->db->where('pengguna.email', $this->session->userdata('email'));
         return $this->db->get();
     }
     
@@ -50,6 +51,7 @@ class Produk_model extends CI_Model
     {
         $this->db->select('count(keranjang.id_keranjang) as total_keranjang');
         $this->db->from('keranjang');
+        $this->db->join('produk','keranjang.id_produk = produk.id_produk');
         $this->db->join('pengguna','keranjang.id_pengguna = pengguna.id_pengguna');
         $this->db->where('pengguna.email', $this->session->userdata('email'));
         return $this->db->get();

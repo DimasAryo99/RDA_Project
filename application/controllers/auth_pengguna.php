@@ -25,9 +25,9 @@ class auth_pengguna extends CI_Controller
                     redirect('auth_pengguna/login');
                 } else {
                     $this->session->set_userdata('email', $auth->email);
-                    $this->session->set_userdata('role', $auth->role);
-                    switch ($auth->role) {
-                        case 1:
+                    $this->session->set_userdata('role_id', $auth->role_id);
+                    switch ($auth->role_id) {
+                        case 3:
                             redirect('home_user');
                             break;
                         case 2:
@@ -43,7 +43,7 @@ class auth_pengguna extends CI_Controller
         public function logout()
         {
             $this->session->unset_userdata('email');
-            $this->session->unset_userdata('role');
+            $this->session->unset_userdata('role_id');
             redirect('home_user');
         }
 }

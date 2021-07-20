@@ -32,7 +32,7 @@
         <a href="<?php echo base_url('tampilan_user/home') ?>">
             <div class="btn btn-sm btn-primary">Lanjutkan Belanja</div>
         </a>
-        <a href="<?php echo base_url('tampilan_user/pembayaran') ?>">
+        <a href="<?php echo base_url('tampilan_user/pembayaran')?>">
             <div class="btn btn-sm btn-success">Pembayaran</div>
     </div>
 

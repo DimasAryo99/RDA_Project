@@ -160,13 +160,12 @@ class Superadmin extends CI_Controller
         $this->session->userdata('email')])->row_array();
 
         $this->load->model('Kurir_model');
-        $data['kurir'] = $this->Kurir_model->LayananKurir();
-        
-        $data['layanan'] = $this->db->get('layanan_kurir')->result_array();
+        $data['kurir'] = $this->Kurir_model->tampilan_kurir();
 
         //form validation tambah kurir
         $this->form_validation->set_rules('nama_kurir', 'Nama Kurir', 'required');
-        $this->form_validation->set_rules('layanan_id', 'Layanan Kurir', 'required');
+        $this->form_validation->set_rules('layanan_kurir', 'Layanan Kurir', 'required');
+        $this->form_validation->set_rules('ongkos_kurir', 'Ongkos Kurir', 'required');
 
         if($this->form_validation->run() ==  false)
         {
@@ -181,7 +180,8 @@ class Superadmin extends CI_Controller
                 $data= 
                 [
                     'nama_kurir' => $this->input->post('nama_kurir'),
-                    'layanan_id' => $this->input->post('layanan_id'),
+                    'layanan_kurir' => $this->input->post('layanan_kurir'),
+                    'ongkos_kurir' => $this->input->post('ongkos_kurir'),
                 ];
             $this->db->insert('kurir', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">

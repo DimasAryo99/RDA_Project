@@ -3,11 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Kurir_model extends CI_Model
 {
-    public function LayananKurir()
+    public function tampilan_kurir()
     {
-        $queryName ="SELECT kurir.* , layanan_kurir.nama_layanan 
-                     FROM kurir,layanan_kurir
-                    WHERE kurir.layanan_id = layanan_kurir.layanan_id 
+        $queryName ="SELECT *
+                     FROM kurir
                 ";
         return $this->db->query($queryName)->result_array();
     }

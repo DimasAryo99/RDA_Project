@@ -6,7 +6,7 @@
                     <h1 class="h3 mb-4 text-gray-800"><?= $tittle; ?></h1>
                     
                     <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-lg-10">
 
                         <?php if(validation_errors()): ?>
                         <div class="alert alert-danger" role="alert">
@@ -22,7 +22,8 @@
                             <tr>
                             <th scope="col">Nomor</th>
                             <th scope="col">Nama Kurir</th>
-                            <th scope="col">Layanan</th>
+                            <th scope="col">Layanan Kurir</th>
+                            <th scope="col">Ongkos Kurir</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,10 +32,8 @@
                             <tr>
                             <th scope="row"><?= $i; ?></th>
                             <td><?= $k['nama_kurir'] ?></td>
-                            <td><?= $k['nama_layanan']?></td>
-                            <td>
-                            <?php echo anchor('Superadmin/editkurir/' . $k['kurir_id'], '<div class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></div>') ?>
-                            </td>
+                            <td><?= $k['layanan_kurir']?></td>
+                            <td><?= $k['ongkos_kurir']?></td>
                             <td>
                             <?php echo anchor('Superadmin/hapuskurir/' . $k['kurir_id'], '<div class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></div>') ?>
                             </td>
@@ -66,13 +65,10 @@
                                 <input type="text" class="form-control" id="nama_kurir" name="nama_kurir" placeholder="Nama Kurir">
                                 </div>
                                 <div class="form-group">
-                                <select name="layanan_id" id="layanan_id" class="form-control">
-                                <option value="">Pilih Layanan</option>
-                                <?php foreach ($layanan as $ln):  ?>
-                                <option value="<?= $ln['layanan_id']; ?>"><?= $ln['nama_layanan'];?></option>
-                                <?php endforeach;  ?>
-                                </select>
+                                <input type="text" class="form-control" id="layanan_kurir" name="layanan_kurir" placeholder="Layanan Kurir">
                                 </div>
+                                <div class="form-group">
+                                <input type="number" class="form-control" id="ongkos_kurir" name="ongkos_kurir" placeholder="Ongkos Kurir">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -81,7 +77,8 @@
                                 </div>
                                 </div>
                             </div>
-                            </div>              
+                            </div>   
+                         </div>              
 
                              <!-- Modal edit toko  -->
                         <div class="modal fade" id="newTokoModal" tabindex="-1" aria-labelledby="newTokoModalLabel" aria-hidden="true">

@@ -14,7 +14,7 @@ class home_user extends CI_Controller
 
         $data['produk'] = $this->Produk_model->tampil_produk()->result();
         
-        $this->load->view('template_user/header');
+        $this->load->view('template_user/header',$data);
         $this->load->view('template_user/sidebar', $data);
         $this->load->view('template_user/topbar', $data);
         $this->load->view('template_user/home', $data);            
