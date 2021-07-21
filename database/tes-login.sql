@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2021 at 09:13 AM
+-- Generation Time: Jul 21, 2021 at 11:17 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -83,15 +83,6 @@ CREATE TABLE `keranjang` (
   `toko_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `keranjang`
---
-
-INSERT INTO `keranjang` (`id_keranjang`, `id_produk`, `id_pengguna`, `jumlah`, `toko_id`) VALUES
-(34, 5, 3, 1, 15),
-(35, 5, 3, 1, 15),
-(36, 5, 3, 1, 15);
-
 -- --------------------------------------------------------
 
 --
@@ -112,25 +103,6 @@ CREATE TABLE `kurir` (
 INSERT INTO `kurir` (`kurir_id`, `nama_kurir`, `layanan_kurir`, `ongkos_kurir`) VALUES
 (2, 'SiCepat', 'Reguler', 9000),
 (3, 'JNE', 'Reguler', 9000);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `layanan_kurir`
---
-
-CREATE TABLE `layanan_kurir` (
-  `layanan_id` int(11) NOT NULL,
-  `nama_layanan` varchar(128) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `layanan_kurir`
---
-
-INSERT INTO `layanan_kurir` (`layanan_id`, `nama_layanan`) VALUES
-(1, 'Reguler'),
-(2, 'Next Day');
 
 -- --------------------------------------------------------
 
@@ -179,7 +151,7 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `ket_produk`, `harga_produk`, `berat_produk`, `stok_produk`, `gambar_produk`, `toko_id`, `kategori_id`) VALUES
-(5, 'Iphone 12 Pro', 'Merupakan produk flagship terbaru dari apple', 21500000, 800, 7, 'Hp2.jpeg', 15, 10),
+(5, 'Iphone 12 Pro', 'Merupakan produk flagship terbaru dari apple', 21500000, 800, 6, 'Hp2.jpeg', 15, 10),
 (6, 'Google Pixel 3', 'Merupakan handphone flagship keluaran dari google ', 6500000, 500, 10, 'Hp1.jpeg', 12, 10),
 (7, 'Airpods 3', 'Merupakan produk keluaran terbaru dari apple', 2000000, 128, 10, 'Earphone1.jpeg', 15, 11),
 (8, 'Pixel Buds', 'Keluaran Earphone terbaru dari google', 1000000, 128, 10, 'Earphone2.jpg', 12, 11),
@@ -213,15 +185,32 @@ INSERT INTO `status_invoice` (`id_statusinv`, `nama_status`, `role_id`) VALUES
 --
 
 CREATE TABLE `tb_invoice` (
-  `id_invoice` int(11) NOT NULL,
+  `id_invoice` int(128) NOT NULL,
   `nama` varchar(56) NOT NULL,
   `alamat` varchar(225) NOT NULL,
   `nomor_telepon` varchar(128) NOT NULL,
   `tgl_pesan` datetime NOT NULL,
   `batas_bayar` datetime NOT NULL,
   `id_statusinv` int(3) NOT NULL,
-  `kurir_id` int(11) NOT NULL
+  `kurir_id` int(11) NOT NULL,
+  `id_pengguna` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_invoice`
+--
+
+INSERT INTO `tb_invoice` (`id_invoice`, `nama`, `alamat`, `nomor_telepon`, `tgl_pesan`, `batas_bayar`, `id_statusinv`, `kurir_id`, `id_pengguna`) VALUES
+(10, 'asdas', 'asdsadsa', 'asdadsdas', '2021-07-20 23:06:33', '2021-07-21 23:06:33', 0, 2, 3),
+(11, 'asdas', 'asdasd', 'asdas', '2021-07-20 23:15:02', '2021-07-21 23:15:02', 0, 2, 3),
+(12, 'asdas', 'asdasd', 'asdas', '2021-07-20 23:22:57', '2021-07-21 23:22:57', 0, 2, 3),
+(13, 'asdas', 'asdasd', 'asdas', '2021-07-20 23:23:13', '2021-07-21 23:23:13', 0, 2, 3),
+(14, 'asdsad', 'asdas', 'asdsa', '2021-07-20 23:23:21', '2021-07-21 23:23:21', 0, 3, 3),
+(15, 'asdsad', 'asdas', 'asdas', '2021-07-20 23:24:29', '2021-07-21 23:24:29', 0, 2, 3),
+(16, 'dsffsa', 'asdas', 'asdsa', '2021-07-20 23:26:54', '2021-07-21 23:26:54', 0, 3, 3),
+(17, 'asdsad', 'asdas', 'asdas', '2021-07-21 00:15:06', '2021-07-22 00:15:06', 0, 2, 3),
+(18, 'asdsad', 'asdas', 'asdas', '2021-07-21 00:15:41', '2021-07-22 00:15:41', 0, 2, 3),
+(19, 'dsfds', 'dsfds', 'dsfdsffds', '2021-07-21 00:16:39', '2021-07-22 00:16:39', 0, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -233,12 +222,31 @@ CREATE TABLE `tb_pesanan` (
   `id_pesanan` int(11) NOT NULL,
   `id_invoice` int(11) NOT NULL,
   `id_produk` int(11) NOT NULL,
-  `nama_produk` varchar(50) NOT NULL,
   `jumlah` int(11) NOT NULL,
-  `harga` int(10) NOT NULL,
   `foto` varchar(128) NOT NULL,
   `toko_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_pesanan`
+--
+
+INSERT INTO `tb_pesanan` (`id_pesanan`, `id_invoice`, `id_produk`, `jumlah`, `foto`, `toko_id`) VALUES
+(4, 10, 6, 2, '', 12),
+(5, 10, 5, 1, '', 15),
+(6, 11, 6, 2, '', 12),
+(7, 11, 5, 1, '', 15),
+(8, 12, 6, 2, '', 12),
+(9, 13, 6, 2, '', 12),
+(10, 13, 5, 1, '', 15),
+(11, 14, 6, 2, '', 12),
+(12, 14, 5, 1, '', 15),
+(13, 15, 6, 2, '', 12),
+(14, 15, 5, 1, '', 15),
+(15, 16, 6, 2, '', 12),
+(16, 16, 5, 1, '', 15),
+(17, 17, 5, 5, '', 15),
+(18, 19, 5, 1, '', 15);
 
 -- --------------------------------------------------------
 
@@ -372,7 +380,11 @@ INSERT INTO `user_sub_menu` (`submenu_id`, `menu_id`, `tittle`, `url`, `icon`, `
 (3, 1, 'Toko', 'Superadmin/toko', 'fas fa-fw fa-store', 1),
 (4, 1, 'Kategori', 'Superadmin/listkategori', 'fas fa-fw fa-tag', 1),
 (5, 1, 'Kurir', 'Superadmin/kurir', 'fas fa-fw fa-shipping-fast', 1),
-(6, 2, 'Produk', 'Admintoko/produk', 'fas fa-fw fa-gifts', 1);
+(6, 2, 'Produk', 'Admintoko/produk', 'fas fa-fw fa-gifts', 1),
+(7, 1, 'Invoice', 'Superadmin/tampil_invoice', '', 1),
+(8, 1, 'Laporan', '', '', 1),
+(9, 2, 'Invoice', 'Admintoko/tampil_invoice', '', 1),
+(10, 2, 'Data Transaksi', 'Admintoko/transaksi', '', 1);
 
 --
 -- Indexes for dumped tables
@@ -401,12 +413,6 @@ ALTER TABLE `keranjang`
 --
 ALTER TABLE `kurir`
   ADD PRIMARY KEY (`kurir_id`);
-
---
--- Indexes for table `layanan_kurir`
---
-ALTER TABLE `layanan_kurir`
-  ADD PRIMARY KEY (`layanan_id`);
 
 --
 -- Indexes for table `pengguna`
@@ -494,7 +500,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `kurir`
@@ -513,6 +519,18 @@ ALTER TABLE `pengguna`
 --
 ALTER TABLE `status_invoice`
   MODIFY `id_statusinv` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tb_invoice`
+--
+ALTER TABLE `tb_invoice`
+  MODIFY `id_invoice` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `tb_pesanan`
+--
+ALTER TABLE `tb_pesanan`
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

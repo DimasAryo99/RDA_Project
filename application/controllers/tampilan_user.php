@@ -118,7 +118,9 @@ class tampilan_user extends CI_Controller
                 'jumlah'        => $c['jumlah'],
                 'toko_id'       => $c['toko_id'],    
             ];
+            //masuk database pesanan
             $this->db->insert('tb_pesanan', $data);
+            //destroy keranjang
             $this->Produk_model->destroykeranjang($c['id_keranjang']);
 
             //taro kurang stok
