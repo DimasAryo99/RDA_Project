@@ -6,7 +6,7 @@
                     <h1 class="h3 mb-4 text-gray-800"><?= $tittle; ?></h1>
                     
                     <div class="row">
-                        <div class="col-lg-10">
+                        <div class="col-lg-8">
 
                         <?php if(validation_errors()): ?>
                         <div class="alert alert-danger" role="alert">
@@ -24,6 +24,7 @@
                             <th scope="col">Nama Kurir</th>
                             <th scope="col">Layanan Kurir</th>
                             <th scope="col">Ongkos Kurir</th>
+                            <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>

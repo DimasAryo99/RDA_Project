@@ -5,7 +5,7 @@ class Admintoko extends CI_Controller
 {
     public function index()
     {
-        $data['tittle'] = 'Toko';
+        $data['tittle'] = 'Dashboard';
         $data['admin_toko'] =  $this->db->get_where('admin_toko',['email_admin' =>
         $this->session->userdata('email_admin')])->row_array();
 

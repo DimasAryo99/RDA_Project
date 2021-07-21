@@ -6,7 +6,7 @@
                     <h1 class="h3 mb-4 text-gray-800"><?= $tittle; ?></h1>
                     
                     <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-lg-10">
 
                         <?php if(validation_errors()): ?>
                         <div class="alert alert-danger" role="alert">
@@ -37,14 +37,10 @@
                             <td><?= $l['nama_toko']?></td>
                             <td><?= $l['deskripsi_toko'] ?></td>
                             <td><?= $l['alamat_toko'] ?></td>
-
                             <td>
                             <?php echo anchor('Superadmin/editoko/' . $l['toko_id'], '<div class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></div>') ?>
-                            </td>
-                            <td>
                             <?php echo anchor('Superadmin/hapustoko/' . $l['toko_id'], '<div class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></div>') ?>
                             </td>
-                            
                             </tr>
                             <?php $i++; ?>
                             <?php endforeach; ?>                

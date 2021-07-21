@@ -28,9 +28,6 @@
                             <th scope="row"><?= $i; ?></th>
                             <td><?= $lk['nama_kategori']?></td>
                             <td>
-                            <?php echo anchor('Superadmin/editkategori/' . $lk['kategori_id'], '<div class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></div>') ?>
-                            </td>
-                            <td>
                             <?php echo anchor('Superadmin/hapuskategori/' . $lk['kategori_id'], '<div class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></div>') ?>
                             </td>
                             </tr>

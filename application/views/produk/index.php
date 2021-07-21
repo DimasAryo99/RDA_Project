@@ -25,7 +25,7 @@
                             <th scope="col">Harga Produk</th>
                             <th scope="col">Berat Produk</th>
                             <th scope="col">Stok Produk</th>
-                            <th scope="col">Gambar Produk</th>
+                            <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,15 +37,10 @@
                             <td><?= $p->harga_produk; ?></td>
                             <td><?= $p->berat_produk; ?></td>
                             <td><?= $p->stok_produk; ?></td>
-                            <td><?= $p->gambar_produk; ?></td>
-
                             <td>
                             <?php echo anchor('Admintoko/edit_produk/' . $p->id_produk, '<div class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></div>') ?>
-                            </td>
-                            <td>
                             <?php echo anchor('Admintoko/hapusproduk/' . $p->id_produk, '<div class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></div>') ?>
                             </td>
-
                             </tr>
                             <?php $i++; ?>
                             <?php endforeach; ?>                

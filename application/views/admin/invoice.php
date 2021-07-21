@@ -14,8 +14,9 @@
                         <thead>
                             <tr>
                             <th scope="col">Id Invoice</th>
-                            <th scope="col">Nama Pesanan</th>
+                            <th scope="col">Nama Pemesan</th>
                             <th scope="col">Alamat Pengiriman</th>
+                            <th scope="col">Nomor Telepon</th>
                             <th scope="col">Tanggal Pemesanan</th>
                             <th scope="col">Batas Pembayaran</th>
                             <th scope="col">Status</th>
@@ -23,17 +24,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!--?php foreach($invoice as $i):  ?>
+                            <?php foreach($invoice as $i):  ?>
                             <tr>
-                            <td><?= $i->id_invoice?></td>
-                            <td><?= $i->nama?></td>
-                            <td><?= $i->alamat?></td>
-                            <td><?= $i->tgl_pesan?></td>
-                            <td><?= $i->batas_bayar?></td>
-                            <td><?php echo anchor('Superadmin/detail/' . $i->id_invoice, '<div class="btn btn-sm btn-primary">Detail') ?></td>
+                            <td><?= $i['id_invoice']?></td>
+                            <td><?= $i['nama']?></td>
+                            <td><?= $i['alamat']?></td>
+                            <td><?= $i['nomor_telepon']?></td>
+                            <td><?= $i['tgl_pesan']?></td>
+                            <td><?= $i['batas_bayar']?></td>
+                            <td><?= $i['status_invoice']?></td>
+                            <td><?php echo anchor('Superadmin/detail_invoice/' . $i['id_invoice'], '<div class="btn btn-sm btn-primary">Detail') ?></td>
                             </tr>
                             <?php $i++; ?>
-                            <!?php endforeach; ?>                
+                            <?php endforeach; ?>                
                         </tbody-->
                         </table>
                                                                      

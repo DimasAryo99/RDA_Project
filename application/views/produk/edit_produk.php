@@ -6,6 +6,11 @@
         <form method="post" action="<?= base_url('Admintoko/updateproduk')?>">
 
                             <div class="form-group">
+                                <label></label>
+                                <input type="text" name="id_produk" id="id_produk" class="form-control" hidden value="<?= $p->id_produk ?>">
+                            </div>
+
+                            <div class="form-group">
                                 <label>Nama Produk</label>
                                 <input type="text" name="nama_produk" id="nama_produk" class="form-control" value="<?= $p->nama_produk ?>">
                             </div>

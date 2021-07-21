@@ -31,14 +31,34 @@ class invoice_model extends CI_Model
         return TRUE;
     }
     
-    public function tampil_data()
+    public function tampil_invoice_superadmin()
     {
-        $result = $this->db->get('tb_invoice');
-        if ($result) {
-            return $result->result();
-        } else {
-            return FALSE;
-        }
+        $query="SELECT *
+                FROM tb_invoice
+        ";
+        return $this->db->query($query)->result_array();
+    }
+    
+    public function tampil_detail_superadmin($id_invoice)
+    {
+        $query="SELECT *
+                FROM tb_invoice, tb_pesanan , produk                
+                WHERE tb_invoice.id_invoice = tb_pesanan.id_invoice
+                AND tb_pesanan.id_produk= produk.id_produk                
+                AND tb_pesanan.id_invoice = $id_invoice
+        ";
+        return $this->db->query($query)->result();
+    }
+
+    public function tampil_foto($id_invoice)
+    {
+        $query="SELECT *
+                FROM tb_invoice, tb_pesanan , produk                
+                WHERE tb_invoice.id_invoice = tb_pesanan.id_invoice
+                AND tb_pesanan.id_produk= produk.id_produk                
+                AND tb_pesanan.id_invoice = $id_invoice
+        ";
+        return $this->db->query($query)->row_array();
     }
     
     public function ambil_id_invoice($id_invoice)
@@ -55,7 +75,7 @@ class invoice_model extends CI_Model
     {
         $result = $this->db->where('id_invoice', $id_invoice)->get('tb_pesanan');
         if ($result->num_rows() > 0) {
-            return $result->result();
+            return $result->row_array();
         } else {
             return false;
         }
