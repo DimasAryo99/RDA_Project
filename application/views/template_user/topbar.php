@@ -23,9 +23,16 @@
                                 </ul>
 
                                 <!-- Alert (Topbar) -->
-            
+                                
                                 
                                 <div class="topbar-divider d-none d-sm-block"></div>
+                                
+                                <a href="<?= base_url('tampilan_user/tampilan_invoice')?>" id="alertsDropdown" role="button"  
+                                   aria-haspopup="true" aria-expanded="false">
+                                   <i class="fas fa-envelope-open-text"></i>
+                                            <!-- Counter - Alerts -->
+                                            <span class="badge badge-danger badge-counter"><?=$tampil1['total_invoice']?></span>
+                                </a>
                                 
                                 <a href="<?= base_url('tampilan_user/detail_keranjang')?>" id="alertsDropdown" role="button"  
                                    aria-haspopup="true" aria-expanded="false">

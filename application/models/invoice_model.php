@@ -30,6 +30,12 @@ class invoice_model extends CI_Model
         }
         return TRUE;
     }
+
+    public function update_buktibayar($where, $data, $table)
+    {
+        $this->db->where($where);
+        $this->db->update($table, $data);
+    }
     
     public function tampil_invoice_superadmin()
     {
@@ -39,6 +45,37 @@ class invoice_model extends CI_Model
         return $this->db->query($query)->result_array();
     }
     
+    public function tampil_invoice_user()
+    {
+        $this->db->select('*');
+        $this->db->from('tb_invoice');
+        $this->db->join('pengguna','tb_invoice.id_pengguna = pengguna.id_pengguna');
+        $this->db->where('pengguna.email', $this->session->userdata('email'));
+        return $this->db->get();
+    }
+    
+    public function tampil_detail_user($id)
+    {
+        $query="SELECT *
+                FROM tb_invoice, tb_pesanan , produk               
+                WHERE tb_invoice.id_invoice = tb_pesanan.id_invoice
+                AND tb_pesanan.id_produk= produk.id_produk                
+                AND tb_pesanan.id_invoice = $id
+        ";
+        return $this->db->query($query)->result();
+    }
+
+    public function tampil_foto($id)
+    {
+        $query="SELECT *
+                FROM tb_invoice, tb_pesanan , produk                
+                WHERE tb_invoice.id_invoice = tb_pesanan.id_invoice
+                AND tb_pesanan.id_produk= produk.id_produk                
+                AND tb_pesanan.id_invoice = $id
+        ";
+        return $this->db->query($query)->row_array();
+    }
+
     public function tampil_detail_superadmin($id_invoice)
     {
         $query="SELECT *
@@ -48,17 +85,6 @@ class invoice_model extends CI_Model
                 AND tb_pesanan.id_invoice = $id_invoice
         ";
         return $this->db->query($query)->result();
-    }
-
-    public function tampil_foto($id_invoice)
-    {
-        $query="SELECT *
-                FROM tb_invoice, tb_pesanan , produk                
-                WHERE tb_invoice.id_invoice = tb_pesanan.id_invoice
-                AND tb_pesanan.id_produk= produk.id_produk                
-                AND tb_pesanan.id_invoice = $id_invoice
-        ";
-        return $this->db->query($query)->row_array();
     }
     
     public function ambil_id_invoice($id_invoice)
@@ -79,6 +105,15 @@ class invoice_model extends CI_Model
         } else {
             return false;
         }
+    }
+
+    public function tampil_jumlahinvoice()
+    {
+        $this->db->select('count(tb_invoice.id_invoice) as total_invoice');
+        $this->db->from('tb_invoice');
+        $this->db->join('pengguna','tb_invoice.id_pengguna = pengguna.id_pengguna');
+        $this->db->where('pengguna.email', $this->session->userdata('email'));
+        return $this->db->get();
     }
 
 }

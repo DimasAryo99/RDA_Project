@@ -11,6 +11,7 @@ class home_user extends CI_Controller
         $this->load->model('Produk_model');
 
         $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
+        $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
 
         $data['produk'] = $this->Produk_model->tampil_produk()->result();
         

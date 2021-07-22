@@ -61,6 +61,7 @@ class tampilan_user extends CI_Controller
         
         $data['keranjang'] = $this->Produk_model->tampilan_keranjang()->result_array();
         $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
+        $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
         
         $this->load->view('template_user/header');
         $this->load->view('template_user/sidebar', $data);
@@ -84,6 +85,7 @@ class tampilan_user extends CI_Controller
         $this->session->userdata('email')])->row_array();
         
         $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
+        $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
         $data['kurir'] = $this->Kurir_model->tampilan_kurir();
         $this->load->model('invoice_model');
         $this->load->view('template_user/header');
@@ -147,6 +149,7 @@ class tampilan_user extends CI_Controller
         $data['produk'] = $this->Produk_model->tampil_produk()->result();
 
         $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
+        $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
         $is_processed = $this->model_invoice->index();
         if ($is_processed) 
         {
@@ -169,6 +172,7 @@ class tampilan_user extends CI_Controller
         $this->session->userdata('email')])->row_array();
 
         $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
+        $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
 
         $this->load->view('template_user/header');
         $this->load->view('template_user/sidebar',$data);
@@ -176,4 +180,70 @@ class tampilan_user extends CI_Controller
         $this->load->view('template_user/detail_barang',$data);            
         $this->load->view('template_user/footer');
     }
+
+    public function tampilan_invoice()
+    {
+        $data['tittle'] = 'Invoice';
+        $data['user'] =  $this->db->get_where('pengguna',['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
+        $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
+        $data['invoice'] = $this->invoice_model->tampil_invoice_user()->result_array();
+
+        $this->load->view('template_user/header');
+        $this->load->view('template_user/sidebar',$data);
+        $this->load->view('template_user/topbar',$data);
+        $this->load->view('template_user/invoice',$data);            
+        $this->load->view('template_user/footer');
+    }
+    
+    public function detail_invoice($id)
+    {
+        $data['tittle'] = 'Invoice';
+        $data['user'] =  $this->db->get_where('pengguna',['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
+        $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
+        
+        $data['pesanan'] = $this->invoice_model->tampil_detail_user($id);
+        $data['invoice'] = $this->invoice_model->tampil_foto($id);
+
+        $this->load->view('template_user/header');
+        $this->load->view('template_user/sidebar',$data);
+        $this->load->view('template_user/topbar',$data);
+        $this->load->view('template_user/detail_invoice',$data);            
+        $this->load->view('template_user/footer');
+    }
+
+    public function upload_buktibayar()
+    {
+        $idinvoice = $this->input->post('id_invoice');
+        $foto = $_FILES['foto']['name'];
+        if ($foto) 
+        {
+            $config['upload_path'] = './asset/img/buktibayar/';
+            $config['allowed_types'] = 'jpg|jpeg|png';
+            $this->load->library('upload', $config);
+            
+            if ($this->upload->do_upload('foto'))
+            {
+                $foto = $this->upload->data('file_name');
+            }
+        }
+
+        $data = [
+            'foto'     => $foto,
+            'status_invoice'  => 'Diproses',
+        ];
+
+        $where = [
+            'id_invoice'     => $idinvoice
+        ];
+        $this->invoice_model->update_buktibayar($where, $data,'tb_invoice');
+        redirect('tampilan_user/tampilan_invoice');
+    }
+
+    
 }

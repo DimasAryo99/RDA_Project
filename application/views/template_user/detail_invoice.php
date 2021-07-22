@@ -32,41 +32,46 @@
             <td colspan="4" align="right">Grand Total</td>
             <td align="center">Rp. <?php echo number_format($total, 0, ',', '.') ?></td>
         </tr-->
+
     </table>
 
-    <a href="<?php echo base_url('Superadmin/tampil_invoice') ?>">
+    <a href="<?php echo base_url('tampilan_user/tampilan_invoice') ?>">
         <div class="btn btn-sm btn-primary">Kembali</div>
-    </a>
-
+    </a>    
 </div>
-
+<div>
     <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-8">
-                    <?= form_open_multipart('Superadmin/update_invoice'); ?>
-                    <div class="col-sm-10">
+    <h4>Aksi</h4>
+        <div class="row">
+            <div class="col-lg-6">
+
+                <?= form_open_multipart('tampilan_user/upload_buktibayar'); ?>
+                <div class="col-sm-10">
                         <input type="text" class="form-control" id="id_invoice" name="id_invoice" value="<?= $invoice['id_invoice']; ?>" hidden="">
-                    </div>
-                        <div class="form-group row">
-                            <div class="col-sm-2">Bukti Bayar</div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2">Bukti Bayar</div>
+                    <div class="col-sm-10">
+                        <div class="row">
                             <div class="col-sm-3">
                                 <img src="<?= base_url('asset/img/buktibayar/') . $invoice['foto']; ?>" class="img-thumbnail">
                             </div>
-                        </div>
-                    <div class="form-group row">
-                        <label for="status" class="col-sm-2 col-form-label">Pilih Status</label>
-                        <div class="col-sm-4">
-                            <select name="status_invoice" id="status_invoice" class="form-control">
-                                <option value="<?=$invoice['status_invoice'];?>"><?=$invoice['status_invoice'];?></option>
-                                <option value="Terkonfirmasi">Terkonfirmasi</option>
-                            </select>
-                            </div>
-                        </div>   
-                            <div class="form-group row justify-content-end">
-                                <div class="col-sm-2">
-                                    <input type="submit" class="btn btn-primary"></input>
+                            <div class="col-sm-9">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="foto" name="foto">
+                                    <label class="custom-file-label" for="image">Choose file</label>
                                 </div>
-                            </div>                       
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="form-group row justify-content-end">
+                    <div class="col-sm">
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </div>
+                </div>
+
+            </div>
         </div>
+    </div>
+</div>

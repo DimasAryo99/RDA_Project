@@ -3,7 +3,7 @@
 
     <?php foreach ($produk as $p) :  ?>
 
-        <form method="post" action="<?= base_url('Admintoko/updateproduk')?>">
+        <form method="post" action="<?= base_url('Admintoko/edit_produk')?>">
 
                             <div class="form-group">
                                 <label></label>

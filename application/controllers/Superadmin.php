@@ -213,14 +213,14 @@ class Superadmin extends CI_Controller
          $this->load->view('template/footer_superadmin');
      }
 
-     public function detail_invoice($id_invoice)
+     public function detail_invoice($id)
      {
         $data['tittle'] = 'Invoice';
         $data['user'] =  $this->db->get_where('user',['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $data['pesanan'] = $this->invoice_model->tampil_detail_superadmin($id_invoice);
-        $data['invoice'] = $this->invoice_model->tampil_foto($id_invoice);
+        $data['pesanan'] = $this->invoice_model->tampil_detail_superadmin($id);
+        $data['invoice'] = $this->invoice_model->tampil_foto($id);
          $this->load->view('template/header',$data);
          $this->load->view('template/sidebar_superadmin',$data);
          $this->load->view('template/topbar_superadmin',$data);
@@ -228,6 +228,81 @@ class Superadmin extends CI_Controller
          $this->load->view('template/footer_superadmin');
      }
 
+     public function update_invoice()
+     {
+        $idinvoice = $this->input->post('id_invoice');
+        $status= $this->input->post('status_invoice');
+        $data = [
+            'status_invoice'  => $status,
+        ];
+        $where = [
+            'id_invoice'     => $idinvoice
+        ];
+        $this->invoice_model->update_buktibayar($where, $data,'tb_invoice');
+        redirect('Superadmin/tampil_invoice');
+     }
+
+     public function laporan()
+     {
+        $data['tittle'] = 'Laporan';
+        $data['user'] =  $this->db->get_where('user',['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['tahun'] = $this->laporan_model->getTahun();
+        $this->load->view('template/header');
+        $this->load->view('template/sidebar_superadmin',$data);
+        $this->load->view('template/topbar_superadmin',$data);
+        $this->load->view('admin/laporan', $data);
+        $this->load->view('template/footer_superadmin');
+     }
+
+     function filter()
+     {
+        $awal = $this->input->post('awal');
+        $akhir = $this->input->post('akhir');
+        $tahun1 = $this->input->post('tahun1');
+        $bulanawal = $this->input->post('bulanawal');
+        $bulanakhir = $this->input->post('bulanakhir');
+        $tahun2 = $this->input->post('tahun2');
+        $nilai = $this->input->post('nilai');
+
+        if($nilai == 1)
+        {
+            $data['tittle'] = 'Laporan';
+            $data['user'] =  $this->db->get_where('user',['email' =>
+            $this->session->userdata('email')])->row_array();
+            $data['datafilter'] = $this->laporan_model->filterTanggal($awal,$akhir);
+
+            $this->load->view('template/header');
+            $this->load->view('template/sidebar_superadmin',$data);
+            $this->load->view('template/topbar_superadmin',$data);
+            $this->load->view('admin/print_laporan', $data);
+            $this->load->view('template/footer_superadmin');
+        }
+        
+        elseif($nilai == 2)
+        {
+            $data['title'] = "Laporan Penjualan Bulanan";
+            $data['subtitle'] = "Dari Bulan: ".$bulanawal .'sampai' .$bulanakhir ."Tahun " .$tahun1;
+            $data['datafilter'] = $this->model_laporan->filterBulan($tahun1, $bulanawal, $bulanakhir);
+            $this->load->view('templates_admin/header');
+            $this->load->view('templates_admin/sidebar');
+            $this->load->view('admin/print_laporan', $data);
+            $this->load->view('templates_admin/footer');
+        }
+
+        elseif($nilai == 3)
+        {
+            $data['title'] = "Laporan Penjualan Tahunan";
+            $data['subtitle'] = 'Tahun: '.$tahun2;
+            $data['datafilter'] = $this->model_laporan->filterTahun($tahun2);
+            $this->load->view('templates_admin/header');
+            $this->load->view('templates_admin/sidebar');
+            $this->load->view('admin/print_laporan', $data);
+            $this->load->view('templates_admin/footer');
+        }
+     
+     /*
      public function transaksi()
      {
         if(isset($_GET['filter']) && ! empty($_GET['filter'])){ // Cek apakah user telah memilih filter dan klik tombol tampilkan
@@ -276,6 +351,8 @@ class Superadmin extends CI_Controller
          $this->load->view('admin/transaksi',$data);
          $this->load->view('template/footer_superadmin');
   }
+
+
   
   public function cetak_transaksi()
   {
@@ -318,6 +395,7 @@ class Superadmin extends CI_Controller
     $pdf = new Spipu\Html2Pdf\Html2Pdf('P','A4','en');  // Settingan PDFnya
     $pdf->WriteHTML($html);
     $pdf->Output('Data Transaksi.pdf', 'D');
-  }
+  }*/
 
-} 
+    } 
+}

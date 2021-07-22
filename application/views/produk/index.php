@@ -62,7 +62,7 @@
                                     <h5 class="modal-title" id="newProdukModalLabel">Tambah Toko</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <form action="<?= base_url('Admintoko/tambah_produk')  ?>" method="post" enctype="multipart/form-data">  
+                                <form action="<?= base_url('Admintoko/produk')  ?>" method="post" enctype="multipart/form-data">  
                                 <div class="modal-body">
                                 
                                 <div class="form-group">

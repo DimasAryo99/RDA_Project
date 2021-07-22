@@ -11,6 +11,7 @@ class produk extends CI_Controller
         $this->load->model('Kategori_model');
 
         $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
+        $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
 
         $data['laptop'] = $this->Kategori_model->laptopkategori()->result();
         $this->load->view('template_user/header');
@@ -28,6 +29,7 @@ class produk extends CI_Controller
         $this->load->model('Kategori_model');
 
         $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
+        $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
 
         $data['handphone'] = $this->Kategori_model->handphonekategori()->result();
         $this->load->view('template_user/header');
@@ -45,6 +47,7 @@ class produk extends CI_Controller
         $this->load->model('Kategori_model');
 
         $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
+        $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
 
         $data['earphone'] = $this->Kategori_model->earphonekategori()->result();
         $this->load->view('template_user/header');
@@ -62,6 +65,7 @@ class produk extends CI_Controller
         $this->load->model('Kategori_model');
 
         $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
+        $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
 
         $data['astore'] = $this->Kategori_model->astorekategori()->result();
         $this->load->view('template_user/header');
@@ -79,6 +83,7 @@ class produk extends CI_Controller
         $this->load->model('Kategori_model');
 
         $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
+        $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
 
         $data['dstore'] = $this->Kategori_model->dstorekategori()->result();
         $this->load->view('template_user/header');
@@ -96,6 +101,7 @@ class produk extends CI_Controller
         $this->load->model('Kategori_model');
 
         $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
+        $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
 
         $data['istore'] = $this->Kategori_model->istorekategori()->result();
         $this->load->view('template_user/header');
