@@ -1,5 +1,7 @@
 
                 <!-- Begin Page Content -->
+                <?= $this->session->flashdata('message')?>
+                
                 <div class="container-fluid">
 
                 <h1 class="h3 mb-4 text-gray-800">Home</h1>
@@ -24,10 +26,3 @@
                     <?php endforeach; ?>
                     </div>
                     </div>
-
-                </div>
-                <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
-

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2021 at 08:26 PM
+-- Generation Time: Jul 23, 2021 at 06:38 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -139,7 +139,6 @@ CREATE TABLE `produk` (
   `nama_produk` varchar(128) NOT NULL,
   `ket_produk` varchar(128) NOT NULL,
   `harga_produk` int(11) NOT NULL,
-  `berat_produk` int(11) NOT NULL,
   `stok_produk` int(11) NOT NULL,
   `gambar_produk` varchar(128) NOT NULL,
   `toko_id` int(11) NOT NULL,
@@ -150,33 +149,28 @@ CREATE TABLE `produk` (
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id_produk`, `nama_produk`, `ket_produk`, `harga_produk`, `berat_produk`, `stok_produk`, `gambar_produk`, `toko_id`, `kategori_id`) VALUES
-(1, 'iPhone 12 Mini', 'Produk terbaru keluaran Apple', 10999999, 100, 5, 'apple_apple_iphone_12_mini_-64gb-_garansi_resmi_ibox_full01_o1f4z5t5.jpg', 11, 10),
-(5, 'Iphone 12 Pro', 'Merupakan produk flagship terbaru dari apple', 21500000, 800, 6, 'Hp2.jpeg', 15, 10),
-(6, 'Google Pixel 3', 'Merupakan handphone flagship keluaran dari google ', 6500000, 500, 10, 'Hp1.jpeg', 12, 10),
-(7, 'Airpods 3', 'Merupakan produk keluaran terbaru dari apple', 2000000, 128, 10, 'Earphone1.jpeg', 15, 11),
-(8, 'Pixel Buds', 'Keluaran Earphone terbaru dari google', 1000000, 128, 10, 'Earphone2.jpg', 12, 11),
-(18, 'Asus Zenbook Pro', 'Merupakan keluaran laptop asus terbaru', 15000000, 1700, 4, 'Laptop1.jpeg', 11, 9),
-(20, 'Case iPhone XR', 'Case iPhone XR warna hitam', 45000, 10, 5, '8b568e2d04b59491eb1c47d2c5c4e5bb1.jpg', 11, 14),
-(21, 'Earphone Philips Muraahh!', 'Earphone Philips super bass', 15000, 10, 7, 'a1a9210e6da205666a12fc3f44e75ade.jpg', 11, 11),
-(23, 'Asus TUF Gaming', 'Laptop keluaran Asus cocok untuk gaming dengan spesifikasi gahar', 12500000, 2500, 3, '5fbdd0cac23ef.jpg', 11, 9),
-(24, 'Xiaomi Redmi Note 10', 'Handphone Xiaomi dengan harga murah sudah mendapatkan layar Super AMOLED', 2500000, 600, 6, 'xiaomi_xiaomi_redmi_note_10_pro_smartphone_-8gb-128gb-_full15_koweda3o.jpg', 11, 10),
-(25, 'Tempered Glass Xiaomi Redmi Note 10', 'Tempered glass khusus Xiaomi Redmi Note 10. Melindungi layar hp anda dari keretakan', 45000, 50, 10, 'Tempered-Glass-Screen-Protector-for-Xiaomi-Redmi-Note-10-Pro-Max-Clear-15032021-01-p.jpg', 11, 14),
-(26, 'Car Charging', 'Charger untuk di mobil. Memiliki 2 slot usb, sehingga dapat charging 2 hp sekaligus', 90000, 40, 10, 'b6e4dbea627eb8401830bbfae116dafc.jpg', 11, 14),
-(27, 'Asus ROG Strix', 'Laptop khusus gaming dari Asus. Asus terkenal dengan durabilitynya mampu bersaing dengan laptop lain', 13000000, 4500, 5, '64681733_ac210967-8deb-440a-ae6f-93acd5665fca_721_721.jpg', 11, 9),
-(28, 'Lenovo Legion', 'Laptop keluaran Lenovo cocok untuk anda grafis desainer dan suka bermain game', 10000000, 4500, 4, 'maxresdefault.jpg', 11, 9),
-(30, 'Poco X3 NFC', 'Handphone Poco yang sudah memiliki fitur NFC di dalamnya', 3500000, 250, 6, 'xiaomi_xiaomi_poco_x3_nfc_8-128_full01_ra1d262c.jpg', 11, 0),
-(32, 'Asus VivoBook A516JA', 'Memiliki prosesor Intel Core i3 generasi terbaru dan RAM sebesar 4GB. Cocok untuk kebutuhan office', 7500000, 1970, 6, 'asus_asus_laptop_vivobook_a516ja_i3-1005g1_4gb_1tb-256gb_w10-ohs_full01_jlb816n7.jpg', 15, 9),
-(33, 'Macbook Air M1', 'Macbook keluaran terbaru dengan inovasi prosesor yang lebih baik dari sebelumnya', 15999000, 2768, 7, 'macbook_air_m1_gold_1.jpg', 15, 9),
-(34, 'iPhone 11 Pro Max 256GB', 'Sistem tiga kamera transformatif yang menambahkan kemampuan luar biasa tanpa kerumitan. Lompatan tak tertandingi dalam hal kekua', 19999999, 250, 7, 'apple_iphone_11_pro_max_midnight_green_1_6_1.jpg', 15, 10),
-(35, 'Xiaomi Redmi Note 9 Pro', 'Best seller product 2019', 3100000, 250, 6, 'xiaomi_redmi_note_9_pro_aurora_blue_1.jpg', 15, 10),
-(36, 'Poco M3 4/64', 'Handphone entry level yang dapat menyaingi handphone flagship lain', 1999999, 250, 4, 'xiaomi_xiaomi_poco_m3_6-128_full01_oa4fg20s.jpg', 15, 10),
-(37, 'Redmi Airdots 2 TWS Bluetooth Earphone', 'Xiaomi Mi AirDots generasi kedua ini merupakan Bluetooth 5.0 earphone memiliki bentuk mirip seperti Apple Airpods dengan tambaha', 250000, 250, 7, 'xiaomi-redmi-airdots-2-tws-bluetooth-earphone-black-1.jpg', 15, 11),
-(39, 'AirPods Gen 2 With Charging Case', 'AirPods terbaru keluaran Apple', 2299999, 100, 5, 'd49af97f-2243-416c-b843-0c6f58862888.jpg', 15, 11),
-(40, 'Case iPhone Xs', 'Casing jelly transparent untuk iPhone Xs', 50000, 30, 10, 'Jelly_Transparant_Case_Soft_Case_iPhone_Xs_iPhone_Xs_Max_iPh.jpg', 15, 10),
-(41, 'Google Chromebook Pixel', 'Laptop besutan Google 2021', 12999000, 2500, 3, 'maxresdefault_(1).jpg', 12, 9),
-(42, 'Google Pixel 6 Pro', 'Hp flagship besutan google keluaran 2021', 10000000, 250, 3, 'csm_E1hyFy6WQAEpJPV_ab27e1db46.jpg', 12, 10),
-(43, 'TWS Haylou GT3', 'Earphone bluetooth keluaran Xiaomi ini cocok untu bermain game, mendengarkan musik, dan menonton film', 300000, 100, 5, 'Ha35502c113034e3c8bfd6b38f4acbf69M.jpg', 12, 11);
+INSERT INTO `produk` (`id_produk`, `nama_produk`, `ket_produk`, `harga_produk`, `stok_produk`, `gambar_produk`, `toko_id`, `kategori_id`) VALUES
+(1, 'iPhone 12 Mini', 'Produk terbaru keluaran Apple', 10999999, 4, 'apple_apple_iphone_12_mini_-64gb-_garansi_resmi_ibox_full01_o1f4z5t5.jpg', 11, 10),
+(5, 'Iphone 12 Pro', 'Merupakan produk flagship terbaru dari apple', 21500000, 2, 'Hp2.jpeg', 15, 10),
+(6, 'Google Pixel 3', 'Merupakan handphone flagship keluaran dari google ', 6500000, 10, 'Hp1.jpeg', 12, 10),
+(7, 'Airpods 3', 'Merupakan produk keluaran terbaru dari apple', 2000000, 10, 'Earphone1.jpeg', 15, 11),
+(8, 'Pixel Buds', 'Keluaran Earphone terbaru dari google', 1000000, 10, 'Earphone2.jpg', 12, 11),
+(18, 'Asus Zenbook Pro', 'Merupakan keluaran laptop asus terbaru', 15000000, 4, 'Laptop1.jpeg', 11, 9),
+(21, 'Earphone Philips Muraahh!', 'Earphone Philips super bass', 15000, 6, 'a1a9210e6da205666a12fc3f44e75ade.jpg', 11, 11),
+(23, 'Asus TUF Gaming', 'Laptop keluaran Asus cocok untuk gaming dengan spesifikasi gahar', 12500000, 3, '5fbdd0cac23ef.jpg', 11, 9),
+(24, 'Xiaomi Redmi Note 10', 'Handphone Xiaomi dengan harga murah sudah mendapatkan layar Super AMOLED', 2500000, 6, 'xiaomi_xiaomi_redmi_note_10_pro_smartphone_-8gb-128gb-_full15_koweda3o.jpg', 11, 10),
+(27, 'Asus ROG Strix', 'Laptop khusus gaming dari Asus. Asus terkenal dengan durabilitynya mampu bersaing dengan laptop lain', 13000000, 5, '64681733_ac210967-8deb-440a-ae6f-93acd5665fca_721_721.jpg', 11, 9),
+(28, 'Lenovo Legion', 'Laptop keluaran Lenovo cocok untuk anda grafis desainer dan suka bermain game', 10000000, 4, 'maxresdefault.jpg', 11, 9),
+(30, 'Poco X3 NFC', 'Handphone Poco yang sudah memiliki fitur NFC di dalamnya', 3500000, 6, 'xiaomi_xiaomi_poco_x3_nfc_8-128_full01_ra1d262c.jpg', 11, 0),
+(32, 'Asus VivoBook A516JA', 'Memiliki prosesor Intel Core i3 generasi terbaru dan RAM sebesar 4GB. Cocok untuk kebutuhan office', 7500000, 6, 'asus_asus_laptop_vivobook_a516ja_i3-1005g1_4gb_1tb-256gb_w10-ohs_full01_jlb816n7.jpg', 15, 9),
+(33, 'Macbook Air M1', 'Macbook keluaran terbaru dengan inovasi prosesor yang lebih baik dari sebelumnya', 15999000, 7, 'macbook_air_m1_gold_1.jpg', 15, 9),
+(34, 'iPhone 11 Pro Max 256GB', 'Sistem tiga kamera transformatif yang menambahkan kemampuan luar biasa tanpa kerumitan. Lompatan tak tertandingi dalam hal kekua', 19999999, 7, 'apple_iphone_11_pro_max_midnight_green_1_6_1.jpg', 15, 10),
+(35, 'Xiaomi Redmi Note 9 Pro', 'Best seller product 2019', 3100000, 6, 'xiaomi_redmi_note_9_pro_aurora_blue_1.jpg', 15, 10),
+(36, 'Poco M3 4/64', 'Handphone entry level yang dapat menyaingi handphone flagship lain', 1999999, 4, 'xiaomi_xiaomi_poco_m3_6-128_full01_oa4fg20s.jpg', 15, 10),
+(37, 'Redmi Airdots 2 TWS Bluetooth Earphone', 'Xiaomi Mi AirDots generasi kedua ini merupakan Bluetooth 5.0 earphone memiliki bentuk mirip seperti Apple Airpods dengan tambaha', 250000, 7, 'xiaomi-redmi-airdots-2-tws-bluetooth-earphone-black-1.jpg', 15, 11),
+(39, 'AirPods Gen 2 With Charging Case', 'AirPods terbaru keluaran Apple', 2299999, 5, 'd49af97f-2243-416c-b843-0c6f58862888.jpg', 15, 11),
+(42, 'Google Pixel 6 Pro', 'Hp flagship besutan google keluaran 2021', 10000000, 3, 'csm_E1hyFy6WQAEpJPV_ab27e1db46.jpg', 12, 10),
+(43, 'TWS Haylou GT3', 'Earphone bluetooth keluaran Xiaomi ini cocok untu bermain game, mendengarkan musik, dan menonton film', 300000, 5, 'Ha35502c113034e3c8bfd6b38f4acbf69M.jpg', 12, 11);
 
 -- --------------------------------------------------------
 
@@ -215,26 +209,29 @@ CREATE TABLE `tb_invoice` (
   `status_invoice` varchar(128) NOT NULL,
   `foto` varchar(128) NOT NULL,
   `kurir_id` int(11) NOT NULL,
-  `id_pengguna` int(11) NOT NULL
+  `id_pengguna` int(11) NOT NULL,
+  `bank` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_invoice`
 --
 
-INSERT INTO `tb_invoice` (`id_invoice`, `nama`, `alamat`, `nomor_telepon`, `tgl_pesan`, `batas_bayar`, `status_invoice`, `foto`, `kurir_id`, `id_pengguna`) VALUES
-(10, 'asdas', 'asdsadsa', 'asdadsdas', '2021-07-20 23:06:33', '2021-07-21 23:06:33', 'Terkonfirmasi', 'bukti110.jpeg', 2, 3),
-(11, 'asdas', 'asdasd', 'asdas', '2021-07-20 23:15:02', '2021-07-21 23:15:02', '', '', 2, 3),
-(12, 'asdas', 'asdasd', 'asdas', '2021-07-20 23:22:57', '2021-07-21 23:22:57', '', '', 2, 3),
-(13, 'asdas', 'asdasd', 'asdas', '2021-07-20 23:23:13', '2021-07-21 23:23:13', '', '', 2, 3),
-(14, 'asdsad', 'asdas', 'asdsa', '2021-07-20 23:23:21', '2021-07-21 23:23:21', '', '', 3, 3),
-(15, 'asdsad', 'asdas', 'asdas', '2021-07-20 23:24:29', '2021-07-21 23:24:29', '', '', 2, 3),
-(16, 'dsffsa', 'asdas', 'asdsa', '2021-07-20 23:26:54', '2021-07-21 23:26:54', '', '', 3, 3),
-(17, 'asdsad', 'asdas', 'asdas', '2021-07-21 00:15:06', '2021-07-22 00:15:06', '', '', 2, 3),
-(18, 'asdsad', 'asdas', 'asdas', '2021-07-21 00:15:41', '2021-07-22 00:15:41', '', '', 2, 3),
-(19, 'dsfds', 'dsfds', 'dsfdsffds', '2021-07-21 00:16:39', '2021-07-22 00:16:39', '', '', 3, 3),
-(20, 'asdasd', 'asdsadsad', 'asdsaas', '2021-07-21 16:26:29', '2021-07-22 16:26:29', '', '', 2, 3),
-(21, 'qwewqe', 'qwewqe', 'qweqw', '2021-07-21 21:37:14', '2021-07-22 21:37:14', '', '', 2, 3);
+INSERT INTO `tb_invoice` (`id_invoice`, `nama`, `alamat`, `nomor_telepon`, `tgl_pesan`, `batas_bayar`, `status_invoice`, `foto`, `kurir_id`, `id_pengguna`, `bank`) VALUES
+(10, 'asdas', 'asdsadsa', 'asdadsdas', '2020-07-03 23:06:33', '2020-07-03 00:30:33', 'menunggu Konfirmasi', '', 2, 3, ''),
+(11, 'asdas', 'asdasd', 'asdas', '2020-07-06 17:00:02', '2020-07-06 19:00:02', 'selesai', '', 2, 3, ''),
+(12, 'asdas', 'asdasd', 'asdas', '2020-07-08 15:22:57', '2020-07-08 17:22:57', 'selesai', '', 2, 3, ''),
+(13, 'asdas', 'asdasd', 'asdas', '2020-07-16 20:45:13', '2020-07-16 22:45:13', 'selesai', '', 2, 3, ''),
+(14, 'asdsad', 'asdas', 'asdsa', '2020-11-07 23:23:21', '2020-11-07 00:23:21', 'selesai', '', 3, 3, ''),
+(15, 'asdsad', 'asdas', 'asdas', '2020-11-13 11:24:29', '2020-11-13 13:24:29', 'selesai', '', 2, 3, ''),
+(16, 'dsffsa', 'asdas', 'asdsa', '2021-01-12 14:26:54', '2021-01-12 16:26:54', 'selesai', '', 3, 3, ''),
+(17, 'asdsad', 'asdas', 'asdas', '2021-01-17 00:15:06', '2021-01-17 00:15:06', 'selesai', '', 2, 3, ''),
+(18, 'asdsad', 'asdas', 'asdas', '2021-02-25 00:15:41', '2021-02-25 00:15:41', 'selesai', '', 2, 3, ''),
+(19, 'dsfds', 'dsfds', 'dsfdsffds', '2021-03-16 00:16:39', '2021-03-16 00:16:39', 'selesai', '', 3, 3, ''),
+(20, 'asdasd', 'asdsadsad', 'asdsaas', '2021-05-12 16:26:29', '2021-05-12 16:26:29', 'selesai', '', 2, 3, ''),
+(21, 'qwewqe', 'qwewqe', 'qweqw', '2021-05-12 21:37:14', '2021-05-12 21:37:14', 'selesai', '', 2, 3, ''),
+(22, 'asdas', 'asdasd', 'asdas', '2021-06-09 06:50:04', '2021-06-09 06:50:04', 'selesai', '', 2, 3, 'BNI-234234324324'),
+(23, 'asdas', 'asdasd', 'asdas', '2021-06-09 11:32:44', '2021-06-09 13:32:44', 'selesai', '', 2, 3, 'BNI-234234324324');
 
 -- --------------------------------------------------------
 
@@ -246,31 +243,31 @@ CREATE TABLE `tb_pesanan` (
   `id_pesanan` int(11) NOT NULL,
   `id_invoice` int(11) NOT NULL,
   `id_produk` int(11) NOT NULL,
-  `jumlah` int(11) NOT NULL,
-  `toko_id` int(11) NOT NULL
+  `jumlah` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_pesanan`
 --
 
-INSERT INTO `tb_pesanan` (`id_pesanan`, `id_invoice`, `id_produk`, `jumlah`, `toko_id`) VALUES
-(4, 10, 6, 2, 12),
-(5, 10, 5, 1, 15),
-(6, 11, 6, 2, 12),
-(7, 11, 5, 1, 15),
-(8, 12, 6, 2, 12),
-(9, 13, 6, 2, 12),
-(10, 13, 5, 1, 15),
-(11, 14, 6, 2, 12),
-(12, 14, 5, 1, 15),
-(13, 15, 6, 2, 12),
-(14, 15, 5, 1, 15),
-(15, 16, 6, 2, 12),
-(16, 16, 5, 1, 15),
-(17, 17, 5, 5, 15),
-(18, 19, 5, 1, 15),
-(19, 21, 5, 2, 15);
+INSERT INTO `tb_pesanan` (`id_pesanan`, `id_invoice`, `id_produk`, `jumlah`) VALUES
+(4, 10, 6, 2),
+(5, 10, 5, 1),
+(6, 11, 6, 2),
+(7, 11, 5, 1),
+(8, 12, 6, 2),
+(9, 13, 6, 2),
+(10, 13, 5, 1),
+(11, 14, 6, 2),
+(12, 14, 5, 1),
+(13, 15, 6, 2),
+(14, 15, 5, 1),
+(15, 16, 6, 2),
+(16, 16, 5, 1),
+(17, 17, 5, 5),
+(18, 19, 5, 1),
+(19, 21, 5, 2),
+(20, 23, 5, 4);
 
 -- --------------------------------------------------------
 
@@ -408,7 +405,7 @@ INSERT INTO `user_sub_menu` (`submenu_id`, `menu_id`, `tittle`, `url`, `icon`, `
 (7, 1, 'Invoice', 'Superadmin/tampil_invoice', 'fas fa-envelope-open-text', 1),
 (8, 1, 'Laporan', 'Superadmin/laporan', 'fas fa-book', 1),
 (9, 2, 'Invoice', 'Admintoko/tampil_invoice', 'fas fa-envelope-open-text', 1),
-(10, 2, 'Data Transaksi', 'Admintoko/transaksi', '', 1);
+(10, 2, 'Laporan ', 'Admintoko/laporan', 'fas fa-book', 1);
 
 --
 -- Indexes for dumped tables
@@ -524,7 +521,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `kurir`
@@ -554,13 +551,13 @@ ALTER TABLE `status_invoice`
 -- AUTO_INCREMENT for table `tb_invoice`
 --
 ALTER TABLE `tb_invoice`
-  MODIFY `id_invoice` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_invoice` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tb_pesanan`
 --
 ALTER TABLE `tb_pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

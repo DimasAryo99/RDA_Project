@@ -8,7 +8,7 @@
         style="background-color:#0076D2;">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-fw fa-store-alt"></i>
             </div>

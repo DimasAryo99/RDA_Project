@@ -29,6 +29,8 @@ class auth_pengguna extends CI_Controller
                     switch ($auth->role_id) {
                         case 3:
                             redirect('home_user');
+                            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                            Your have been login</div>');
                             break;
                         case 2:
                             redirect('welcome');
@@ -44,6 +46,8 @@ class auth_pengguna extends CI_Controller
         {
             $this->session->unset_userdata('email');
             $this->session->unset_userdata('role_id');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Your have been logout</div>');
             redirect('home_user');
         }
 }

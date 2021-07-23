@@ -57,7 +57,6 @@ class Admintoko extends CI_Controller
             $nama_produk = $this->input->post('nama');
             $ket_produk = $this->input->post('ket');
             $harga_produk = $this->input->post('harga');
-            $berat_produk = $this->input->post('berat');
             $stok_produk = $this->input->post('stok');
             $toko_id = $this->input->post('toko_id');
             $gambar_produk = $_FILES['gambar_produk']['name'];
@@ -83,7 +82,6 @@ class Admintoko extends CI_Controller
                 'nama_produk'      => $nama_produk,
                 'ket_produk'       => $ket_produk,
                 'harga_produk'      => $harga_produk,
-                'berat_produk'         => $berat_produk,
                 'stok_produk'          => $stok_produk,
                 'toko_id'       => $toko_id,
                 'gambar_produk' => $gambar_produk,
@@ -117,14 +115,12 @@ class Admintoko extends CI_Controller
         $nama_produk       = $this->input->post('nama_produk');
         $keterangan_produk  = $this->input->post('ket_produk');
         $harga_produk     = $this->input->post('harga_produk');
-        $berat_produk       = $this->input->post('berat_produk');
         $stok_produk  = $this->input->post('stok_produk');
 
         $data = [
             'nama_produk'     => $nama_produk,
             'ket_produk'    => $keterangan_produk,
             'harga_produk'      => $harga_produk,
-            'berat_produk'     => $berat_produk,
             'stok_produk'    => $stok_produk,
         ];
 
@@ -144,13 +140,27 @@ class Admintoko extends CI_Controller
         redirect('Admintoko/produk');   
     }
 
+    public function detail_produk($id_produk)
+    {
+        $data['tittle'] = 'Produk';
+        $data['admin_toko'] =  $this->db->get_where('admin_toko',['email_admin' =>
+        $this->session->userdata('email_admin')])->row_array();
+        $data['detail'] = $this->Produk_model->detail_brg($id_produk)->result();
+
+        $this->load->view('template/header',$data);
+        $this->load->view('template/sidebar_admintoko',$data);
+        $this->load->view('template/topbar_admintoko',$data);
+        $this->load->view('produk/detail_produk',$data);  
+        $this->load->view('template/footer_admintoko');
+    }
+
     public function tampil_invoice()
     {
        $data['tittle'] = 'Invoice';
        $data['admin_toko'] =  $this->db->get_where('admin_toko',['email_admin' =>
        $this->session->userdata('email_admin')])->row_array();
 
-        $data['invoice'] = $this->invoice_model->tampil_data();
+        $data['invoice'] = $this->invoice_model->tampil_invoice_toko()->result();
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebar_admintoko',$data);
         $this->load->view('template/topbar_admintoko',$data);
@@ -164,13 +174,81 @@ class Admintoko extends CI_Controller
        $data['admin_toko'] =  $this->db->get_where('admin_toko',['email_admin' =>
        $this->session->userdata('email_admin')])->row_array();
 
-        $data['invoice'] = $this->invoice_model->ambil_id_invoice($id_invoice);
-        $data['pesanan'] = $this->invoice_model->ambil_id_pesanan($id_invoice);
+        $data['invoice'] = $this->invoice_model->detail_invoice_toko($id_invoice)->row();
+        $data['pesanan'] = $this->invoice_model->detail_invoice_toko2($id_invoice)->result();
+        $data['pesanan2'] = $this->invoice_model->tampil_detail_admintoko2($id_invoice);
         $this->load->view('template/header',$data);
-        $this->load->view('template/sidebar_superadmin',$data);
-        $this->load->view('template/topbar_superadmin',$data);
+        $this->load->view('template/sidebar_admintoko',$data);
+        $this->load->view('template/topbar_admintoko',$data);
         $this->load->view('admintoko/detail',$data);
-        $this->load->view('template/footer_superadmin');
+        $this->load->view('template/footer_admintoko');
     }
+
+    public function laporan()
+     {
+        $data['tittle'] = 'Laporan';
+        $data['admin_toko'] =  $this->db->get_where('admin_toko',['email_admin' =>
+        $this->session->userdata('email_admin')])->row_array();
+
+        $data['tahun'] = $this->laporan_model->getTahun();
+        $this->load->view('template/header');
+        $this->load->view('template/sidebar_admintoko',$data);
+        $this->load->view('template/topbar_admintoko',$data);
+        $this->load->view('admintoko/laporan', $data);
+        $this->load->view('template/footer_admintoko');
+     }
+
+     function filter()
+     {
+        $awal = $this->input->post('awal');
+        $akhir = $this->input->post('akhir');
+        $tahun1 = $this->input->post('tahun1');
+        $bulanawal = $this->input->post('bulanawal');
+        $bulanakhir = $this->input->post('bulanakhir');
+        $tahun2 = $this->input->post('tahun2');
+        $nilai = $this->input->post('nilai');
+
+        if($nilai == 1)
+        {
+            $data['tittle'] = 'Laporan';
+            $data['admin_toko'] =  $this->db->get_where('admin_toko',['email_admin' =>
+            $this->session->userdata('email_admin')])->row_array();
+            $data['datafilter'] = $this->laporan_model->filterTanggaltoko($awal,$akhir)->result();
+
+            $this->load->view('template/header');
+            $this->load->view('template/sidebar_admintoko',$data);
+            $this->load->view('template/topbar_admintoko',$data);
+            $this->load->view('admintoko/print_laporan', $data);
+            $this->load->view('template/footer_admintoko');
+        }
+
+        elseif($nilai == 2)
+        {
+            $data['tittle'] = 'Laporan';
+            $data['admin_toko'] =  $this->db->get_where('admin_toko',['email_admin' =>
+            $this->session->userdata('email_admin')])->row_array();
+            $data['datafilter'] = $this->laporan_model->filterBulantoko($tahun1, $bulanawal, $bulanakhir)->result();
+
+            $this->load->view('template/header');
+            $this->load->view('template/sidebar_admintoko',$data);
+            $this->load->view('template/topbar_admintoko',$data);
+            $this->load->view('admintoko/print_laporan', $data);
+            $this->load->view('template/footer_admintoko');
+        }
+
+        else
+        {
+            $data['tittle'] = 'Laporan';
+            $data['admin_toko'] =  $this->db->get_where('admin_toko',['email_admin' =>
+            $this->session->userdata('email_admin')])->row_array();
+            $data['datafilter'] = $this->laporan_model->filterTahuntoko($tahun2)->result();
+
+            $this->load->view('template/header');
+            $this->load->view('template/sidebar_admintoko',$data);
+            $this->load->view('template/topbar_admintoko',$data);
+            $this->load->view('admintoko/print_laporan', $data);
+            $this->load->view('template/footer_admintoko');
+        }
+     }
 
 } 

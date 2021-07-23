@@ -3,7 +3,7 @@
 
     <?php foreach ($produk as $p) :  ?>
 
-        <form method="post" action="<?= base_url('Admintoko/edit_produk')?>">
+        <form method="post" action="<?= base_url('Admintoko/updateproduk')?>">
 
                             <div class="form-group">
                                 <label></label>
@@ -23,11 +23,6 @@
                             <div class="form-group">
                                 <label>Harga Produk</label>
                                 <input type="text" name="harga_produk" id="harga_produk" class="form-control" value="<?= $p->harga_produk ?>">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Berat Produk</label>
-                                <input type="text" name="berat_produk" id="berat_produk" class="form-control" value="<?= $p->berat_produk?>">
                             </div>
 
                             <div class="form-group">

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <h3>Input Alamat Pengiriman dan Pembayaran</h3>
+            <h3>Input Alamat Pengiriman dan Pilih Pembayaran</h3>
 
             <form method="post" action="<?= base_url('tampilan_user/tambah_invoice') ?> ">
 
@@ -32,11 +32,12 @@
 
                 <div class="form-group">
                     <label>Pilih BANK</label>
-                    <select class="form-control">
-                        <option>BCA - xxxxxx</option>
-                        <option>BNI - xxxxxx</option>
-                        <option>Mandiri - xxxxxx</option>
-                        <option>BRI - xxxxxx</option>
+                    <select class="form-control" id="bank" name="bank">
+                        <option value=""></option>
+                        <option value="BCA-324234324234234">BCA - 324234324234234</option>
+                        <option value="BNI-234234324324">BNI - 234234324324</option>
+                        <option value="Mandiri-234324324342">Mandiri - 234324324342</option>
+                        <option value="BRI-5646501651">BRI - 5646501651</option>
                     </select>
                 </div>
 

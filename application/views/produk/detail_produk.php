@@ -45,8 +45,8 @@
                             </tr>
 
                         </table>
-                        <?php echo anchor('tampilan_user/tambah_ke_keranjang/' . $d->id_produk, '<div class="btn btn-sm btn-primary">Tambah ke Keranjang</div>') ?>
-                        <?php echo anchor('home_user/index/', '<div class="btn btn-sm btn-danger">Kembali</div>') ?>
+                        <?php echo anchor('Admintoko/produk/', '<div class="btn btn-sm btn-danger">Kembali</div>') ?>
+                        <?php echo anchor('Admintoko/edit_produk/' . $d->id_produk, '<div class="btn btn-sm btn-primary">Edit Produk</div>') ?>
                     </div>
 
                 </div>

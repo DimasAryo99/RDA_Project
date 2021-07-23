@@ -55,7 +55,7 @@ class tampilan_user extends CI_Controller
         
     public function detail_keranjang()
     {
-        $data['tittle'] = 'Home';
+        $data['tittle'] = 'Detail Keranjang';
         $data['user'] =  $this->db->get_where('pengguna',['email' =>
         $this->session->userdata('email')])->row_array();
         
@@ -108,6 +108,8 @@ class tampilan_user extends CI_Controller
             'tgl_pesan'     => date('Y-m-d H:i:s'),
             'batas_bayar'   => date('Y-m-d H:i:s', mktime(date('H'), date('i'), date('s'), date('m'), date('d') + 1, date('Y'))),
             'id_pengguna'   => $user['id_pengguna'],
+            'bank'          => $this->input->post('bank'),
+            
         ];
         $this->db->insert('tb_invoice', $invoice);
         $id_invoice = $this->db->insert_id();
@@ -117,8 +119,7 @@ class tampilan_user extends CI_Controller
             $data= [
                 'id_invoice'    => $id_invoice,
                 'id_produk'     => $c['id_produk'],
-                'jumlah'        => $c['jumlah'],
-                'toko_id'       => $c['toko_id'],    
+                'jumlah'        => $c['jumlah'],   
             ];
             //masuk database pesanan
             $this->db->insert('tb_pesanan', $data);
@@ -208,6 +209,7 @@ class tampilan_user extends CI_Controller
         $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
         
         $data['pesanan'] = $this->invoice_model->tampil_detail_user($id);
+        $data['pesanan2'] = $this->invoice_model->tampil_detail_user2($id);
         $data['invoice'] = $this->invoice_model->tampil_foto($id);
 
         $this->load->view('template_user/header');
@@ -216,6 +218,22 @@ class tampilan_user extends CI_Controller
         $this->load->view('template_user/detail_invoice',$data);            
         $this->load->view('template_user/footer');
     }
+
+    public function update_invoice()
+     {
+        $idinvoice = $this->input->post('id_invoice');
+        $status= $this->input->post('status_invoice');
+        $data = [
+            'status_invoice'  => $status,
+        ];
+        $where = [
+            'id_invoice'     => $idinvoice
+        ];
+        $this->invoice_model->update_buktibayar($where, $data,'tb_invoice');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        Status Berhasil Diubah</div>');
+        redirect('Superadmin/tampil_invoice');
+     }
 
     public function upload_buktibayar()
     {
@@ -235,13 +253,15 @@ class tampilan_user extends CI_Controller
 
         $data = [
             'foto'     => $foto,
-            'status_invoice'  => 'Diproses',
+            'status_invoice'  => 'menunggu Konfirmasi',
         ];
 
         $where = [
             'id_invoice'     => $idinvoice
         ];
         $this->invoice_model->update_buktibayar($where, $data,'tb_invoice');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                            Berhasil Upload Bukti Bayar</div>');
         redirect('tampilan_user/tampilan_invoice');
     }
 

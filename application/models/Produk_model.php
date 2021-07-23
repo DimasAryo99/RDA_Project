@@ -102,12 +102,12 @@ class Produk_model extends CI_Model
 
     public function detail_brg($id_produk)
     {
-        $result = $this->db->where('id_produk', $id_produk)->get('produk');
-        if ($result->num_rows() > 0) {
-            return $result->result();
-        } else {
-            return false;
-        }
+        $this->db->select('*');
+        $this->db->from('produk');
+        $this->db->join('toko','produk.toko_id = toko.toko_id');
+        $this->db->join('kategori','produk.kategori_id = kategori.kategori_id');
+        $this->db->where('produk.id_produk', $id_produk);
+        return $this->db->get();
     }
 
 }

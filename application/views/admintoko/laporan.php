@@ -4,7 +4,7 @@
             <div class="card">
             <h5 class="card-header">Filter By Tanggal</h5>
             <div class="card-body">
-                <form action="<?php echo base_url(); ?>Superadmin/filter" method="POST" target='_blank'>
+                <form action="<?php echo base_url(); ?>Admintoko/filter" method="POST" target='_blank'>
                     <input type="hidden" name="nilai" value="1">
                     <b>Tanggal Awal</b><br>
                     <input type="date" name="awal" required=""><br>
@@ -21,7 +21,7 @@
         <div class="card">
             <h5 class="card-header">Filter By Bulan</h5>
             <div class="card-body">
-                <form action="<?php echo base_url(); ?>Superadmin/filter" method="POST" target='_blank'>
+                <form action="<?php echo base_url(); ?>Admintoko/filter" method="POST" target='_blank'>
         
                     <input type="hidden" name="nilai" value="2">
 
@@ -77,7 +77,7 @@
         <div class="card">
             <h5 class="card-header">Filter By Tahun</h5>
             <div class="card-body">
-                <form action="<?php echo base_url(); ?>Superadmin/filter" method="POST" target='_blank'>
+                <form action="<?php echo base_url(); ?>Admintoko/filter" method="POST" target='_blank'>
         
                     <input type="hidden" name="nilai" value="3">
 

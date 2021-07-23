@@ -6,7 +6,7 @@
                     <h1 class="h3 mb-4 text-gray-800"><?= $tittle; ?></h1>
                     
                     <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-lg-10">
 
                         <?php if(validation_errors()): ?>
                         <div class="alert alert-danger" role="alert">
@@ -23,7 +23,6 @@
                             <th scope="col">Nomor</th>
                             <th scope="col">Nama Produk</th>
                             <th scope="col">Harga Produk</th>
-                            <th scope="col">Berat Produk</th>
                             <th scope="col">Stok Produk</th>
                             <th scope="col">Action</th>
                             </tr>
@@ -35,9 +34,9 @@
                             <th scope="row"><?= $i; ?></th>
                             <td><?= $p->nama_produk; ?></td>
                             <td><?= $p->harga_produk; ?></td>
-                            <td><?= $p->berat_produk; ?></td>
                             <td><?= $p->stok_produk; ?></td>
                             <td>
+                            <?php echo anchor('Admintoko/detail_produk/' . $p->id_produk, '<div class="btn btn-success btn-sm"><i class="fa fa-search"></i></div>') ?>
                             <?php echo anchor('Admintoko/edit_produk/' . $p->id_produk, '<div class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></div>') ?>
                             <?php echo anchor('Admintoko/hapusproduk/' . $p->id_produk, '<div class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></div>') ?>
                             </td>

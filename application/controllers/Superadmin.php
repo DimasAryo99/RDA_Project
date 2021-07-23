@@ -9,8 +9,9 @@ class Superadmin extends CI_Controller
         $data['user'] =  $this->db->get_where('user',['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $this->load->model('Toko_model');
-        $data['jtoko'] = $this->Toko_model->JumlahToko();
+        /*$data['tampilan'] = $this->invoice_model->tampil_konfirmasi();
+        $data['tampilan2'] = $this->invoice_model->tampil_kirim();
+        $data['tampilan2'] = $this->invoice_model->tampil_kirim();*/
         
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebar_superadmin',$data);
@@ -61,7 +62,7 @@ class Superadmin extends CI_Controller
             ];
         $this->db->insert('admin_toko', $data2);
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-         Baru Berhasil ditambah</div>');
+        Toko Berhasil ditambah</div>');
         redirect('Superadmin/toko');
         }
     }
@@ -103,7 +104,9 @@ class Superadmin extends CI_Controller
         ];
         $this->load->model('Toko_model');
         $this->Toko_model->update_toko($where, $data,'toko');
-        redirect('Superadmin?toko');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+         Toko berhasil ditambah</div>');
+        redirect('Superadmin/toko');
     }
 
     //method hapus toko
@@ -112,6 +115,8 @@ class Superadmin extends CI_Controller
         $this->load->model('Toko_model');
         $this->Toko_model->HapusToko($id);
         $this->session->set_flashdata('flash', 'Dihapus');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        Toko berhasil dihapus </div>');
         redirect('Superadmin/toko');
     }
 
@@ -150,6 +155,8 @@ class Superadmin extends CI_Controller
         $this->load->model('Kategori_model');
         $this->Kategori_model->HapusKategori($kategori_id);
         $this->session->set_flashdata('flash', 'Dihapus');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        Kategori berhasil dihapus</div>');
         redirect('Superadmin/listkategori');
     }
 
@@ -185,7 +192,7 @@ class Superadmin extends CI_Controller
                 ];
             $this->db->insert('kurir', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Baru Berhasil ditambah</div>');
+            Kurir Berhasil ditambah</div>');
             redirect('Superadmin/kurir');
         }
     }
@@ -196,6 +203,8 @@ class Superadmin extends CI_Controller
          $this->load->model('Kurir_model');
          $this->Kurir_model->HapusKurir($kurir_id);
          $this->session->set_flashdata('flash', 'Dihapus');
+         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+         Kurir Berhasil Dihapus</div>');
          redirect('Superadmin/kurir');
      }
 
@@ -220,6 +229,7 @@ class Superadmin extends CI_Controller
         $this->session->userdata('email')])->row_array();
 
         $data['pesanan'] = $this->invoice_model->tampil_detail_superadmin($id);
+        $data['pesanan2'] = $this->invoice_model->tampil_detail_superadmin2($id);
         $data['invoice'] = $this->invoice_model->tampil_foto($id);
          $this->load->view('template/header',$data);
          $this->load->view('template/sidebar_superadmin',$data);
@@ -239,6 +249,8 @@ class Superadmin extends CI_Controller
             'id_invoice'     => $idinvoice
         ];
         $this->invoice_model->update_buktibayar($where, $data,'tb_invoice');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        Status Berhasil Diubah</div>');
         redirect('Superadmin/tampil_invoice');
      }
 
@@ -271,7 +283,7 @@ class Superadmin extends CI_Controller
             $data['tittle'] = 'Laporan';
             $data['user'] =  $this->db->get_where('user',['email' =>
             $this->session->userdata('email')])->row_array();
-            $data['datafilter'] = $this->laporan_model->filterTanggal($awal,$akhir);
+            $data['datafilter'] = $this->laporan_model->filterTanggal($awal,$akhir)->result();
 
             $this->load->view('template/header');
             $this->load->view('template/sidebar_superadmin',$data);
@@ -282,24 +294,30 @@ class Superadmin extends CI_Controller
         
         elseif($nilai == 2)
         {
-            $data['title'] = "Laporan Penjualan Bulanan";
-            $data['subtitle'] = "Dari Bulan: ".$bulanawal .'sampai' .$bulanakhir ."Tahun " .$tahun1;
-            $data['datafilter'] = $this->model_laporan->filterBulan($tahun1, $bulanawal, $bulanakhir);
-            $this->load->view('templates_admin/header');
-            $this->load->view('templates_admin/sidebar');
+            $data['tittle'] = 'Laporan';
+            $data['user'] =  $this->db->get_where('user',['email' =>
+            $this->session->userdata('email')])->row_array();
+            $data['datafilter'] = $this->laporan_model->filterBulan($tahun1, $bulanawal, $bulanakhir)->result();
+
+            $this->load->view('template/header');
+            $this->load->view('template/sidebar_superadmin',$data);
+            $this->load->view('template/topbar_superadmin',$data);
             $this->load->view('admin/print_laporan', $data);
-            $this->load->view('templates_admin/footer');
+            $this->load->view('template/footer_superadmin');
         }
 
-        elseif($nilai == 3)
+        else
         {
-            $data['title'] = "Laporan Penjualan Tahunan";
-            $data['subtitle'] = 'Tahun: '.$tahun2;
-            $data['datafilter'] = $this->model_laporan->filterTahun($tahun2);
-            $this->load->view('templates_admin/header');
-            $this->load->view('templates_admin/sidebar');
+            $data['tittle'] = 'Laporan';
+            $data['user'] =  $this->db->get_where('user',['email' =>
+            $this->session->userdata('email')])->row_array();
+            $data['datafilter'] = $this->laporan_model->filterTahun($tahun2)->result();
+
+            $this->load->view('template/header');
+            $this->load->view('template/sidebar_superadmin',$data);
+            $this->load->view('template/topbar_superadmin',$data);
             $this->load->view('admin/print_laporan', $data);
-            $this->load->view('templates_admin/footer');
+            $this->load->view('template/footer_superadmin');
         }
      
      /*
