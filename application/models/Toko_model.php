@@ -13,6 +13,14 @@ class Toko_model extends CI_Model
         return $this->db->query($queryName)->result_array();
     }
 
+    public function PemilikToko2()
+    {
+        $queryName ="SELECT * 
+                     FROM admin_toko
+                ";
+        return $this->db->query($queryName)->result_array();
+    }
+
     public function HapusToko($id)
     {
         $this->db->where('toko_id', $id);

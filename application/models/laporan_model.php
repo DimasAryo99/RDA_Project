@@ -17,15 +17,15 @@ class laporan_model extends CI_Model
 
     public function filterTanggal($awal,$akhir)
     {
-        $query = "SELECT date(tb_invoice.tgl_pesan) as tanggal 
+        $query = "SELECT DATE_FORMAT(tb_invoice.tgl_pesan, '%D''%M''%Y') as tanggal 
         , SUM(produk.harga_produk * tb_pesanan.jumlah) AS pendapatan, toko.nama_toko
         FROM tb_pesanan, produk, tb_invoice ,toko
         WHERE tb_pesanan.id_produk = produk.id_produk
         AND tb_pesanan.id_invoice = tb_invoice.id_invoice 
         AND produk.toko_id = toko.toko_id
-        AND tb_invoice.status_invoice = 'selesai'  
         AND date(tgl_pesan) BETWEEN '$awal' AND '$akhir'
-        GROUP BY toko.toko_id ASC"
+        GROUP BY tb_invoice.tgl_pesan
+        ORDER BY tb_invoice.tgl_pesan ASC"
         ;
         return $this->db->query($query);
     }
@@ -33,33 +33,34 @@ class laporan_model extends CI_Model
     public function filterTanggaltoko($awal,$akhir)
     {
         $tes= $this->session->userdata('email_admin');
-        $query = "SELECT date(tb_invoice.tgl_pesan) as tanggal 
+        $query = "SELECT DATE_FORMAT(tb_invoice.tgl_pesan, '%D' '%M' '%Y') as tanggal 
         , SUM(produk.harga_produk * tb_pesanan.jumlah) AS pendapatan, toko.nama_toko
         FROM tb_pesanan, produk, tb_invoice ,toko, admin_toko
         WHERE tb_pesanan.id_produk = produk.id_produk
         AND tb_pesanan.id_invoice = tb_invoice.id_invoice 
         AND produk.toko_id = toko.toko_id 
         AND toko.toko_id = admin_toko.toko_id
-        AND tb_invoice.status_invoice = 'selesai'  
         AND date(tgl_pesan) BETWEEN '$awal' AND '$akhir'
         AND admin_toko.email_admin = '$tes'
-        GROUP BY toko.toko_id ASC"
+        GROUP BY tb_invoice.tgl_pesan 
+        ORDER BY tb_invoice.tgl_pesan ASC"
         ;
         return $this->db->query($query);
     }
 
     public function filterBulan($tahun1, $bulanawal,$bulanakhir)
+    /*AND produk.toko_id = toko.toko_id*/
     {
-        $query = "SELECT date(tb_invoice.tgl_pesan) as tanggal 
-        , SUM(produk.harga_produk * tb_pesanan.jumlah) AS pendapatan, toko.nama_toko
-        FROM tb_pesanan, produk, tb_invoice ,toko
+        $query = "SELECT DATE_FORMAT(tb_invoice.tgl_pesan, '%M' '%Y') as tanggal 
+        , produk.harga_produk * tb_pesanan.jumlah AS pendapatan, toko.nama_toko
+        FROM tb_pesanan, produk, tb_invoice, toko
         WHERE tb_pesanan.id_produk = produk.id_produk
-        AND tb_pesanan.id_invoice = tb_invoice.id_invoice 
-        AND produk.toko_id = toko.toko_id
-        AND tb_invoice.status_invoice = 'selesai'  
-        AND YEAR(tgl_pesan) = '$tahun1' 
-        AND MONTH(tgl_pesan) BETWEEN '$bulanawal' AND '$bulanakhir'
-        GROUP BY toko.toko_id ASC"
+        AND tb_pesanan.id_invoice = tb_invoice.id_invoice
+        AND produk.toko_id = toko.toko_id 
+        AND year(tb_invoice.tgl_pesan) = '$tahun1' 
+        AND month(tb_invoice.tgl_pesan) BETWEEN '$bulanawal' AND '$bulanakhir'
+        GROUP BY MONTH(tb_invoice.tgl_pesan) 
+        ORDER BY tb_invoice.tgl_pesan ASC"
         ;
         return $this->db->query($query);
     }
@@ -67,33 +68,33 @@ class laporan_model extends CI_Model
     public function filterBulantoko($tahun1, $bulanawal,$bulanakhir)
     {
         $tes= $this->session->userdata('email_admin');
-        $query = "SELECT date(tb_invoice.tgl_pesan) as tanggal 
+        $query = "SELECT DATE_FORMAT(tb_invoice.tgl_pesan, '%M' '%Y') as tanggal 
         , SUM(produk.harga_produk * tb_pesanan.jumlah) AS pendapatan, toko.nama_toko
         FROM tb_pesanan, produk, tb_invoice ,toko ,admin_toko
         WHERE tb_pesanan.id_produk = produk.id_produk
         AND tb_pesanan.id_invoice = tb_invoice.id_invoice 
         AND produk.toko_id = toko.toko_id
-        AND tb_invoice.status_invoice = 'selesai'  
         AND YEAR(tgl_pesan) = '$tahun1' 
         AND toko.toko_id = admin_toko.toko_id
         AND MONTH(tgl_pesan) BETWEEN '$bulanawal' AND '$bulanakhir'
         AND admin_toko.email_admin = '$tes'
-        GROUP BY toko.toko_id ASC"
+        GROUP BY MONTH(tb_invoice.tgl_pesan) 
+        ORDER BY tb_invoice.tgl_pesan ASC"
         ;
         return $this->db->query($query);
     }
     
     public function filterTahun($tahun2)
     {
-        $query = "SELECT date(tb_invoice.tgl_pesan) as tanggal 
+        $query = "SELECT DATE_FORMAT(tb_invoice.tgl_pesan, '%Y') as tanggal 
         , SUM(produk.harga_produk * tb_pesanan.jumlah) AS pendapatan, toko.nama_toko
         FROM tb_pesanan, produk, tb_invoice ,toko
         WHERE tb_pesanan.id_produk = produk.id_produk
         AND tb_pesanan.id_invoice = tb_invoice.id_invoice 
         AND produk.toko_id = toko.toko_id
-        AND tb_invoice.status_invoice = 'selesai'   
         AND YEAR(tgl_pesan) = '$tahun2'
-        GROUP BY toko.toko_id ASC" 
+        GROUP BY YEAR(tb_invoice.tgl_pesan) 
+        ORDER BY tb_invoice.tgl_pesan ASC" 
         ;
         return $this->db->query($query);
     }
@@ -101,20 +102,19 @@ class laporan_model extends CI_Model
     public function filterTahuntoko($tahun2)
     {
         $tes= $this->session->userdata('email_admin');
-        $query = "SELECT date(tb_invoice.tgl_pesan) as tanggal 
+        $query = "SELECT DATE_FORMAT(tb_invoice.tgl_pesan, '%Y') as tanggal 
         , SUM(produk.harga_produk * tb_pesanan.jumlah) AS pendapatan, toko.nama_toko
         FROM tb_pesanan, produk, tb_invoice ,toko ,admin_toko
         WHERE tb_pesanan.id_produk = produk.id_produk
         AND tb_pesanan.id_invoice = tb_invoice.id_invoice 
         AND produk.toko_id = toko.toko_id  
         AND toko.toko_id = admin_toko.toko_id
-        AND tb_invoice.status_invoice = 'selesai' 
         AND YEAR(tgl_pesan) = '$tahun2'
         AND admin_toko.email_admin = '$tes'
-        GROUP BY toko.toko_id ASC" 
+        GROUP BY YEAR(tb_invoice.tgl_pesan) 
+        ORDER BY tb_invoice.tgl_pesan ASC" 
         ;
         return $this->db->query($query);
     }
-
 
 }

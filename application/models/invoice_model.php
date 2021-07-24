@@ -41,6 +41,7 @@ class invoice_model extends CI_Model
     {
         $query="SELECT *
                 FROM tb_invoice
+                ORDER BY tb_invoice.id_invoice DESC
         ";
         return $this->db->query($query)->result_array();
     }
@@ -101,6 +102,7 @@ class invoice_model extends CI_Model
         $this->db->from('tb_invoice');
         $this->db->join('pengguna','tb_invoice.id_pengguna = pengguna.id_pengguna');
         $this->db->where('pengguna.email', $this->session->userdata('email'));
+        $this->db->order_by('tb_invoice.id_invoice', 'DESC');
         return $this->db->get();
     }
     
@@ -136,6 +138,7 @@ class invoice_model extends CI_Model
         AND produk.toko_id = toko.toko_id 
         AND toko.toko_id = admin_toko.toko_id 
         AND admin_toko.email_admin = '$tes'
+        ORDER BY tb_invoice.id_invoice DESC
         ";
         return $this->db->query($query);
     }
@@ -224,6 +227,7 @@ class invoice_model extends CI_Model
         $this->db->from('tb_invoice');
         $this->db->join('pengguna','tb_invoice.id_pengguna = pengguna.id_pengguna');
         $this->db->where('pengguna.email', $this->session->userdata('email'));
+        $this->db->where('tb_invoice.status_invoice','!= selesai');
         return $this->db->get();
     }
 

@@ -14,8 +14,8 @@
                         </div>
                         <?php endif; ?>
 
-                        <a href="" class="btn btn-primary mb-2" data-toggle="modal" 
-                        data-target="#newTokoModal">Tambah Toko</a>
+                        <!--a href="" class="btn btn-primary mb-2" data-toggle="modal" 
+                        data-target="#newTokoModal">Tambah Toko</a!-->
 
                         <table class="table table-hover">
                         <thead>
@@ -68,7 +68,7 @@
                                 <select name="admin_id" id="admin_id" class="form-control">
                                 <option value="">Pilih Pemilik</option>
                                 
-                                <?php foreach ($listoko as $l):  ?>
+                                <?php foreach ($pemilik as $l):  ?>
                                 <option value="<?= $l['admin_id']; ?>"><?= $l['name_admin'];?></option>
                                 <?php endforeach;  ?> 
                                 </select>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2021 at 06:38 AM
+-- Generation Time: Jul 24, 2021 at 08:14 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -83,6 +83,14 @@ CREATE TABLE `keranjang` (
   `toko_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `keranjang`
+--
+
+INSERT INTO `keranjang` (`id_keranjang`, `id_produk`, `id_pengguna`, `jumlah`, `toko_id`) VALUES
+(78, 1, 3, 2, 11),
+(79, 5, 3, 1, 15);
+
 -- --------------------------------------------------------
 
 --
@@ -126,7 +134,11 @@ CREATE TABLE `pengguna` (
 
 INSERT INTO `pengguna` (`id_pengguna`, `nama`, `username`, `password`, `role_id`, `image`, `email`) VALUES
 (2, 'tes123', 'dimas', '1234', 3, 'default.jpg', 'tes123@mail.com'),
-(3, 'Dimas', 'Dimas', '1234', 3, 'default.jpg', 'dimasaryo819@gmail.com');
+(3, 'Dimas', 'Dimas', '1234', 3, 'default.jpg', 'dimasaryo819@gmail.com'),
+(4, 'alif', 'alif', '1234', 3, 'default.jpg', 'alif@gmail.com'),
+(5, 'user1', 'user1', '1234', 3, 'default.jpg', 'user1@gmail.com'),
+(6, 'user123', 'user123', '1234', 3, 'default.jpg', 'user123@gmail.com'),
+(7, 'endang', 'endang', '1234', 3, 'default.jpg', 'endang@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -150,12 +162,12 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `ket_produk`, `harga_produk`, `stok_produk`, `gambar_produk`, `toko_id`, `kategori_id`) VALUES
-(1, 'iPhone 12 Mini', 'Produk terbaru keluaran Apple', 10999999, 4, 'apple_apple_iphone_12_mini_-64gb-_garansi_resmi_ibox_full01_o1f4z5t5.jpg', 11, 10),
-(5, 'Iphone 12 Pro', 'Merupakan produk flagship terbaru dari apple', 21500000, 2, 'Hp2.jpeg', 15, 10),
-(6, 'Google Pixel 3', 'Merupakan handphone flagship keluaran dari google ', 6500000, 10, 'Hp1.jpeg', 12, 10),
+(1, 'iPhone 12 Mini', 'Produk terbaru keluaran Apple', 10999999, -3, 'apple_apple_iphone_12_mini_-64gb-_garansi_resmi_ibox_full01_o1f4z5t5.jpg', 11, 10),
+(5, 'Iphone 12 Pro', 'Merupakan produk flagship terbaru dari apple', 21500000, -2, 'Hp2.jpeg', 15, 10),
+(6, 'Google Pixel 3', 'Merupakan handphone flagship keluaran dari google ', 6500000, 9, 'Hp1.jpeg', 12, 10),
 (7, 'Airpods 3', 'Merupakan produk keluaran terbaru dari apple', 2000000, 10, 'Earphone1.jpeg', 15, 11),
-(8, 'Pixel Buds', 'Keluaran Earphone terbaru dari google', 1000000, 10, 'Earphone2.jpg', 12, 11),
-(18, 'Asus Zenbook Pro', 'Merupakan keluaran laptop asus terbaru', 15000000, 4, 'Laptop1.jpeg', 11, 9),
+(8, 'Pixel Buds', 'Keluaran Earphone terbaru dari google', 1000000, 7, 'Earphone2.jpg', 12, 11),
+(18, 'Asus Zenbook Pro', 'Merupakan keluaran laptop asus terbaru', 15000000, 2, 'Laptop1.jpeg', 11, 9),
 (21, 'Earphone Philips Muraahh!', 'Earphone Philips super bass', 15000, 6, 'a1a9210e6da205666a12fc3f44e75ade.jpg', 11, 11),
 (23, 'Asus TUF Gaming', 'Laptop keluaran Asus cocok untuk gaming dengan spesifikasi gahar', 12500000, 3, '5fbdd0cac23ef.jpg', 11, 9),
 (24, 'Xiaomi Redmi Note 10', 'Handphone Xiaomi dengan harga murah sudah mendapatkan layar Super AMOLED', 2500000, 6, 'xiaomi_xiaomi_redmi_note_10_pro_smartphone_-8gb-128gb-_full15_koweda3o.jpg', 11, 10),
@@ -231,7 +243,18 @@ INSERT INTO `tb_invoice` (`id_invoice`, `nama`, `alamat`, `nomor_telepon`, `tgl_
 (20, 'asdasd', 'asdsadsad', 'asdsaas', '2021-05-12 16:26:29', '2021-05-12 16:26:29', 'selesai', '', 2, 3, ''),
 (21, 'qwewqe', 'qwewqe', 'qweqw', '2021-05-12 21:37:14', '2021-05-12 21:37:14', 'selesai', '', 2, 3, ''),
 (22, 'asdas', 'asdasd', 'asdas', '2021-06-09 06:50:04', '2021-06-09 06:50:04', 'selesai', '', 2, 3, 'BNI-234234324324'),
-(23, 'asdas', 'asdasd', 'asdas', '2021-06-09 11:32:44', '2021-06-09 13:32:44', 'selesai', '', 2, 3, 'BNI-234234324324');
+(23, 'asdas', 'asdasd', 'asdas', '2021-06-09 11:32:44', '2021-06-09 13:32:44', 'selesai', '', 2, 3, 'BNI-234234324324'),
+(24, 'charlie', 'ancol', '9998762364', '2021-07-24 11:02:47', '2021-07-25 11:02:47', '', '', 2, 3, 'BNI-234234324324'),
+(25, 'mike', 'senopati', '0811133294', '2021-07-24 11:04:18', '2021-07-25 11:04:18', '', '', 2, 3, 'BNI-234234324324'),
+(26, 'will', 'gading serpong', '087877456783', '2021-07-24 11:05:09', '2021-07-25 11:05:09', '', '', 2, 3, 'Mandiri-234324324342'),
+(27, 'akram', 'cempaka putih', '08786661723', '2021-07-24 11:07:21', '2021-07-25 11:07:21', '', '', 2, 3, 'BRI-5646501651'),
+(28, 'olivia', 'simprug', '0813145450465', '2021-07-24 11:08:52', '2021-07-25 11:08:52', '', '', 2, 3, 'Mandiri-234324324342'),
+(29, 'chandra', 'gatot subroto', '0813145450465', '2021-07-24 11:10:12', '2021-07-25 11:10:12', '', '', 3, 3, 'BNI-234234324324'),
+(30, 'hanif', 'kebon jeruk', '0857123456', '2021-07-24 11:11:44', '2021-07-25 11:11:44', '', '', 3, 3, 'Mandiri-234324324342'),
+(31, 'nabilah', 'taman aries', '087877456783', '2021-07-24 11:12:49', '2021-07-25 11:12:49', '', '', 3, 3, 'BCA-324234324234234'),
+(32, 'Dimas Aryo', 'jakarta', '0908329843', '2021-07-24 12:47:14', '2021-07-25 12:47:14', '', '', 2, 3, 'BCA-324234324234234'),
+(33, 'Dimas Aryo', 'jakarta', '323443343', '2021-07-24 13:10:52', '2021-07-25 13:10:52', '', '', 2, 3, 'BCA-324234324234234'),
+(34, 'asaSAsaASAS', 'aSASa', 'asaSA', '2021-07-24 13:12:05', '2021-07-25 13:12:05', '', '', 2, 3, 'BCA-324234324234234');
 
 -- --------------------------------------------------------
 
@@ -267,7 +290,29 @@ INSERT INTO `tb_pesanan` (`id_pesanan`, `id_invoice`, `id_produk`, `jumlah`) VAL
 (17, 17, 5, 5),
 (18, 19, 5, 1),
 (19, 21, 5, 2),
-(20, 23, 5, 4);
+(20, 23, 5, 4),
+(21, 24, 43, 2),
+(22, 25, 23, 1),
+(23, 25, 24, 1),
+(24, 25, 5, 1),
+(25, 26, 36, 1),
+(26, 26, 32, 1),
+(27, 27, 34, 1),
+(28, 27, 6, 1),
+(29, 28, 1, 2),
+(30, 29, 7, 1),
+(31, 29, 6, 1),
+(32, 29, 21, 1),
+(33, 29, 23, 1),
+(34, 30, 28, 1),
+(35, 30, 33, 1),
+(36, 31, 6, 2),
+(37, 32, 1, 2),
+(38, 32, 5, 1),
+(39, 33, 1, 2),
+(40, 33, 5, 1),
+(41, 34, 1, 2),
+(42, 34, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -509,19 +554,19 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `admin_toko`
 --
 ALTER TABLE `admin_toko`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `kurir`
@@ -533,7 +578,7 @@ ALTER TABLE `kurir`
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `produk`
@@ -551,13 +596,19 @@ ALTER TABLE `status_invoice`
 -- AUTO_INCREMENT for table `tb_invoice`
 --
 ALTER TABLE `tb_invoice`
-  MODIFY `id_invoice` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_invoice` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tb_pesanan`
 --
 ALTER TABLE `tb_pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT for table `toko`
+--
+ALTER TABLE `toko`
+  MODIFY `toko_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

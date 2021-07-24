@@ -37,9 +37,9 @@
                                         </button>
                                     </form>
                                     <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="<?= base_url('auth/registration')?>">Buat Akun Toko</a>
-                                    </div>
+                                    <!--div class="text-center">
+                                        <a class="small" href="<?= base_url('auth_superadmin/registration')?>">Buat Akun Toko</a>
+                                    </!--div!-->
                                 </div>
                             </div>
                         </div>

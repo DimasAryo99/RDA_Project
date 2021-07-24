@@ -87,56 +87,70 @@ class tampilan_user extends CI_Controller
         $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
         $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
         $data['kurir'] = $this->Kurir_model->tampilan_kurir();
+
+        $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required');
+        $this->form_validation->set_rules('alamat', 'Alamat Lengkap', 'required');
+        $this->form_validation->set_rules('no_telp', 'Nomor Telepon', 'required');
+        $this->form_validation->set_rules('kurir_id', 'Jasa Pengiriman', 'required');
+        $this->form_validation->set_rules('bank', 'Pilih Bank', 'required');
+
+        if($this->form_validation->run() ==  false)
+        {
         $this->load->model('invoice_model');
         $this->load->view('template_user/header');
         $this->load->view('template_user/sidebar', $data);
         $this->load->view('template_user/topbar',$data);
         $this->load->view('template_user/pembayaran',$data);            
         $this->load->view('template_user/footer');
+        }
+        else
+        {
+            date_default_timezone_set('Asia/Jakarta');
+            $user=$this->db->get_where('pengguna',['email'=>$this->session->userdata('email')])->row_array();
+            $cek=$this->Produk_model->simpan_pesanan($user['id_pengguna'])->result_array();
+            $invoice    = [
+                'nama'          => $this->input->post('nama'),
+                'alamat'        => $this->input->post('alamat'),
+                'nomor_telepon' => $this->input->post('no_telp'),
+                'kurir_id'      => $this->input->post('kurir_id'),
+                'tgl_pesan'     => date('Y-m-d H:i:s'),
+                'batas_bayar'   => date('Y-m-d H:i:s', mktime(date('H'), date('i'), date('s'), date('m'), date('d') + 1, date('Y'))),
+                'id_pengguna'   => $user['id_pengguna'],
+                'bank'          => $this->input->post('bank'),
+                
+            ];
+            $this->db->insert('tb_invoice', $invoice);
+            $id_invoice = $this->db->insert_id();
+        
+            foreach($cek as $c)
+            {
+                $data= [
+                    'id_invoice'    => $id_invoice,
+                    'id_produk'     => $c['id_produk'],
+                    'jumlah'        => $c['jumlah'],   
+                ];
+                //masuk database pesanan
+                $this->db->insert('tb_pesanan', $data);
+                //destroy keranjang
+                $this->Produk_model->destroykeranjang($c['id_keranjang']);
+        
+                //taro kurang stok
+                $produk=$this->db->get_where('produk',['id_produk'=>$c['id_produk']])->row_array();
+        
+                $hasil = $produk['stok_produk'] - $c['jumlah'];
+                
+                $this->db->set('stok_produk',$hasil);
+                $this->db->where('id_produk',$produk['id_produk']);
+                $this->db->update('produk');
+            }
+            $this->session->set_flashdata('flash', 'Dihapus'); 
+            redirect('home_user/index');
+        }
+        
     }
     
     public function tambah_invoice()
     {
-        date_default_timezone_set('Asia/Jakarta');
-        $user=$this->db->get_where('pengguna',['email'=>$this->session->userdata('email')])->row_array();
-        $cek=$this->Produk_model->simpan_pesanan($user['id_pengguna'])->result_array();
-        $invoice    = [
-            'nama'          => $this->input->post('nama'),
-            'alamat'        => $this->input->post('alamat'),
-            'nomor_telepon' => $this->input->post('no_telp'),
-            'kurir_id'      => $this->input->post('kurir_id'),
-            'tgl_pesan'     => date('Y-m-d H:i:s'),
-            'batas_bayar'   => date('Y-m-d H:i:s', mktime(date('H'), date('i'), date('s'), date('m'), date('d') + 1, date('Y'))),
-            'id_pengguna'   => $user['id_pengguna'],
-            'bank'          => $this->input->post('bank'),
-            
-        ];
-        $this->db->insert('tb_invoice', $invoice);
-        $id_invoice = $this->db->insert_id();
-
-        foreach($cek as $c)
-        {
-            $data= [
-                'id_invoice'    => $id_invoice,
-                'id_produk'     => $c['id_produk'],
-                'jumlah'        => $c['jumlah'],   
-            ];
-            //masuk database pesanan
-            $this->db->insert('tb_pesanan', $data);
-            //destroy keranjang
-            $this->Produk_model->destroykeranjang($c['id_keranjang']);
-
-            //taro kurang stok
-            $produk=$this->db->get_where('produk',['id_produk'=>$c['id_produk']])->row_array();
-
-            $hasil = $produk['stok_produk'] - $c['jumlah'];
-            
-            $this->db->set('stok_produk',$hasil);
-            $this->db->where('id_produk',$produk['id_produk']);
-            $this->db->update('produk');
-        }
-        $this->session->set_flashdata('flash', 'Dihapus'); 
-        redirect('home_user/index');
 
     }
 
@@ -174,6 +188,7 @@ class tampilan_user extends CI_Controller
 
         $data['tampil'] = $this->Produk_model->tampil_jumlahkeranjang()->row_array();
         $data['tampil1'] = $this->invoice_model->tampil_jumlahinvoice()->row_array();
+        $data['detail'] = $this->Produk_model->detail_brg($id_produk)->result();
 
         $this->load->view('template_user/header');
         $this->load->view('template_user/sidebar',$data);
@@ -253,7 +268,7 @@ class tampilan_user extends CI_Controller
 
         $data = [
             'foto'     => $foto,
-            'status_invoice'  => 'menunggu Konfirmasi',
+            'status_invoice'  => 'menunggu konfirmasi',
         ];
 
         $where = [

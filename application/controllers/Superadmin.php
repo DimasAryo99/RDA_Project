@@ -56,11 +56,6 @@ class Superadmin extends CI_Controller
                 'alamat_toko' => $this->input->post('alamat_toko'),
             ];
         $this->db->insert('toko', $data);
-            $data2= 
-            [
-                'admin_id' => $this->input->post('admin_id'),
-            ];
-        $this->db->insert('admin_toko', $data2);
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
         Toko Berhasil ditambah</div>');
         redirect('Superadmin/toko');
@@ -285,11 +280,7 @@ class Superadmin extends CI_Controller
             $this->session->userdata('email')])->row_array();
             $data['datafilter'] = $this->laporan_model->filterTanggal($awal,$akhir)->result();
 
-            $this->load->view('template/header');
-            $this->load->view('template/sidebar_superadmin',$data);
-            $this->load->view('template/topbar_superadmin',$data);
-            $this->load->view('admin/print_laporan', $data);
-            $this->load->view('template/footer_superadmin');
+            $this->load->view("tanggal", $data);
         }
         
         elseif($nilai == 2)
@@ -299,11 +290,7 @@ class Superadmin extends CI_Controller
             $this->session->userdata('email')])->row_array();
             $data['datafilter'] = $this->laporan_model->filterBulan($tahun1, $bulanawal, $bulanakhir)->result();
 
-            $this->load->view('template/header');
-            $this->load->view('template/sidebar_superadmin',$data);
-            $this->load->view('template/topbar_superadmin',$data);
-            $this->load->view('admin/print_laporan', $data);
-            $this->load->view('template/footer_superadmin');
+            $this->load->view("bulan", $data);
         }
 
         else
@@ -313,11 +300,7 @@ class Superadmin extends CI_Controller
             $this->session->userdata('email')])->row_array();
             $data['datafilter'] = $this->laporan_model->filterTahun($tahun2)->result();
 
-            $this->load->view('template/header');
-            $this->load->view('template/sidebar_superadmin',$data);
-            $this->load->view('template/topbar_superadmin',$data);
-            $this->load->view('admin/print_laporan', $data);
-            $this->load->view('template/footer_superadmin');
+            $this->load->view("tahun", $data);
         }
      
      /*
@@ -415,5 +398,5 @@ class Superadmin extends CI_Controller
     $pdf->Output('Data Transaksi.pdf', 'D');
   }*/
 
-    } 
+    }
 }

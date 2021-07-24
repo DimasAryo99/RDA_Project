@@ -21,7 +21,6 @@ class registrasi_pengguna extends CI_Controller
                 } else 
                 {
                     $data = [
-                        'id'            => '',
                         'image'         => 'default.jpg',
                         'nama'          => $this->input->post('nama'),
                         'email'         => $this->input->post('email'),

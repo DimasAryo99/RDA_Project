@@ -215,11 +215,7 @@ class Admintoko extends CI_Controller
             $this->session->userdata('email_admin')])->row_array();
             $data['datafilter'] = $this->laporan_model->filterTanggaltoko($awal,$akhir)->result();
 
-            $this->load->view('template/header');
-            $this->load->view('template/sidebar_admintoko',$data);
-            $this->load->view('template/topbar_admintoko',$data);
-            $this->load->view('admintoko/print_laporan', $data);
-            $this->load->view('template/footer_admintoko');
+            $this->load->view("tanggal", $data);
         }
 
         elseif($nilai == 2)
@@ -229,11 +225,7 @@ class Admintoko extends CI_Controller
             $this->session->userdata('email_admin')])->row_array();
             $data['datafilter'] = $this->laporan_model->filterBulantoko($tahun1, $bulanawal, $bulanakhir)->result();
 
-            $this->load->view('template/header');
-            $this->load->view('template/sidebar_admintoko',$data);
-            $this->load->view('template/topbar_admintoko',$data);
-            $this->load->view('admintoko/print_laporan', $data);
-            $this->load->view('template/footer_admintoko');
+            $this->load->view("bulan", $data);
         }
 
         else
@@ -243,11 +235,7 @@ class Admintoko extends CI_Controller
             $this->session->userdata('email_admin')])->row_array();
             $data['datafilter'] = $this->laporan_model->filterTahuntoko($tahun2)->result();
 
-            $this->load->view('template/header');
-            $this->load->view('template/sidebar_admintoko',$data);
-            $this->load->view('template/topbar_admintoko',$data);
-            $this->load->view('admintoko/print_laporan', $data);
-            $this->load->view('template/footer_admintoko');
+            $this->load->view("tahun", $data);
         }
      }
 

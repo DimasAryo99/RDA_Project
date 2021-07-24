@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2021 at 05:55 AM
+-- Generation Time: Jul 24, 2021 at 06:33 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.21
 
@@ -55,7 +55,23 @@ INSERT INTO `tb_pesanan` (`id_pesanan`, `id_invoice`, `id_produk`, `jumlah`) VAL
 (17, 17, 5, 5),
 (18, 19, 5, 1),
 (19, 21, 5, 2),
-(20, 23, 5, 4);
+(20, 23, 5, 4),
+(21, 24, 43, 2),
+(22, 25, 23, 1),
+(23, 25, 24, 1),
+(24, 25, 5, 1),
+(25, 26, 36, 1),
+(26, 26, 32, 1),
+(27, 27, 34, 1),
+(28, 27, 6, 1),
+(29, 28, 1, 2),
+(30, 29, 7, 1),
+(31, 29, 6, 1),
+(32, 29, 21, 1),
+(33, 29, 23, 1),
+(34, 30, 28, 1),
+(35, 30, 33, 1),
+(36, 31, 6, 2);
 
 --
 -- Indexes for dumped tables
@@ -75,7 +91,7 @@ ALTER TABLE `tb_pesanan`
 -- AUTO_INCREMENT for table `tb_pesanan`
 --
 ALTER TABLE `tb_pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

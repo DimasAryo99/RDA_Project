@@ -29,7 +29,7 @@
     </table>
 
     <div align="right">
-        <a href="<?php echo base_url('tampilan_user/home') ?>">
+        <a href="<?php echo base_url('home_user') ?>">
             <div class="btn btn-sm btn-primary">Lanjutkan Belanja</div>
         </a>
         <a href="<?php echo base_url('tampilan_user/pembayaran')?>">
