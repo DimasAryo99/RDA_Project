@@ -50,7 +50,6 @@
                         <option value="BRI-5646501651">BRI - 5646501651</option>
                     </select>
                 </div>
-
                 <button type="submit" class="btn btn-sm btn-primary mb-3">Pesan</button>
                 
             </form>

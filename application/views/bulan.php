@@ -38,7 +38,7 @@
      echo '
 
      <tr>
-
+ 
       <td>'.$row->tanggal.'</td>
       
       <td>'.$row->nama_toko.'</td>
@@ -48,7 +48,6 @@
      </tr>
 
      ';
-
     } ?>
 
    </table>

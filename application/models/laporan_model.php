@@ -109,7 +109,7 @@ class laporan_model extends CI_Model
         AND tb_pesanan.id_invoice = tb_invoice.id_invoice 
         AND produk.toko_id = toko.toko_id  
         AND toko.toko_id = admin_toko.toko_id
-        AND YEAR(tgl_pesan) = '$tahun2'
+        AND YEAR(tb_invoice.tgl_pesan) = '$tahun2'
         AND admin_toko.email_admin = '$tes'
         GROUP BY YEAR(tb_invoice.tgl_pesan) 
         ORDER BY tb_invoice.tgl_pesan ASC" 
